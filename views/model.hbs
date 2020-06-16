@@ -1,0 +1,402 @@
+<div class="admin-panel clearfix">
+    <div class="slidebar">
+        <div class="logo">
+            <a href=""></a>
+        </div>
+        <ul>
+            <li class="drop">
+                <a href="#physiology" class="dropTitle">
+                    Physiology <i class="fa fa-angle-up"></i>
+                </a>
+                <ul class="subMenu active">
+                    <li><a href="#dashboard" id="targeted">Reaction Diagram</a></li>
+                    <li><a href="#posts">Reactions</a></li>
+                    <li><a href="#media">Structures</a></li>
+                    <li><a href="#pages">Species & Molecules</a></li>
+                    <li><a href="#observables">Observables</a></li>
+                </ul>
+            </li>
+            <li class="drop">
+                <a href="#applications" class="dropTitle">
+                    Applications <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="subMenu">
+                    <li class="drop child">
+                        <a class="dropTitle">
+                            Symmetric Geometry <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="subMenu">
+                            <li><a href="#comments">Specifications</a></li>
+                            <li><a href="#plugins">Simulations</a></li>
+                        </ul>
+                    </li>
+                    <li class="drop child">
+                        <a class="dropTitle">
+                            Asymmetric Geometry <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="subMenu">
+                            <li><a href="#links">Specifications</a></li>
+                            <li><a href="#widgets">Simulations</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="drop">
+                <a href="#functions" class="dropTitle">
+                    Functions <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="subMenu">
+                    <li><a href="#users">Functions</a></li>
+                    <li><a href="#tools">Parameters</a></li>
+                </ul>
+            </li>
+            <li class="drop">
+                <a href="#pathway" class="dropTitle">
+                    Pathway <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="subMenu">
+                    <li><a href="#settings">Pathway</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <ul class="topbar clearfix">
+            <li><a id="modelName" href="#"></a></li>
+            <li><a href="./printPage.html">p</a></li>
+            <li><a href="#">o</a></li>
+            <li><a href="#">f</a></li>
+            <li><a href="#">n</a></li>
+        </ul>
+        <!-- <div class="landingContent">
+          <h2>Landing content</h2>
+        </div> -->
+        <div class="mainContent clearfix">
+            <div id="physiology" class="optionData">
+                <h2 class="header">Physiology</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content">
+                            <li>Reaction</li>
+                        </ul>
+                        <ul class="content">
+                            <li>Name</li>
+                        </ul>
+
+                        <ul class="content">
+                            <li>Structure</li>
+                        </ul>
+                        <ul class="discussions">
+                            <li>Kinetics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="dashboard" class="optionData">
+                <h2 class="header"><span class="icon"></span>Reaction Diagram</h2>
+                <div class="reactionDiagram" id="diagram">
+                    <img class="image-zoom-available"
+                        src="https://vcellapi-beta.cam.uchc.edu:8080/biomodel/172076998/diagram" alt="reactionDiagram"
+                        draggable="false" />
+                </div>
+                <div class="monitor table small">
+                    <h4>Publications</h4>
+                </div>
+                <div class="monitor table small">
+                    <h4>Annotation</h4>
+                    <p id="annotation"></p>
+                </div>
+            </div>
+            <div id="media" class="optionData">
+                <h2 class="header">Structures</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content" id="structureName">
+                            <li>Name</li>
+                        </ul>
+                        <ul class="discussions" id="structureType">
+                            <li>Type</li>
+                        </ul>
+                        <ul class="discussions" id="structurePolarity">
+                            <li>Electrical (Membrane Polarity)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="posts" class="optionData">
+                <h2 class="header">Reactions</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content" id="reactionReaction">
+                            <li class="open">
+                                Reaction
+                                <div class="card-wrap">
+                                    <div class="tooltip-container">
+                                        <div class="tooltip-heading">
+                                            <h1>Reaction Details</h1>
+                                        </div>
+
+                                        <span class="close"></span>
+                                        <div class="bottom">
+                                            <button class="btn">
+                                                <a href="#reactionObjectNotation"> Kinetics</a>
+                                            </button>
+                                            <button class="btn">
+                                                <a href="#reactionParameters"> Annotations</a>
+                                            </button>
+                                        </div>
+                                        <!-- <div class="reactionContent"> -->
+                                        <div id="reactionObjectNotation" class="reactionOptionData">
+                                            <div class="monitor table small">
+                                                <div class="clearfix">
+                                                    <ul class="content">
+                                                        <li>Object c1</li>
+                                                    </ul>
+                                                    <ul class="content">
+                                                        <li>Object c2</li>
+                                                    </ul>
+
+                                                    <ul class="content">
+                                                        <li>Object c3</li>
+                                                    </ul>
+                                                    <ul class="discussions">
+                                                        <li>Object c4</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div id="reactionParameters" class="reactionOptionData">
+                          <div class="monitor table small">
+                            <div class="clearfix">
+                              <ul class="content">
+                                <li>param c1</li>
+                              </ul>
+                              <ul class="content">
+                                <li>param c2</li>
+                              </ul>
+
+                              <ul class="content">
+                                <li>param c3</li>
+                              </ul>
+                              <ul class="discussions">
+                                <li>param c4</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div> -->
+                                        <!-- </div> -->
+                                        <!-- <div
+                          class="slider-container"
+                          id="reactionObjectNotation"
+                        >
+                          <p>
+                            Parameters
+                          </p>
+                          <p>
+                            User Defined Parameters
+                          </p>
+
+                          <p>
+                            Global Parameters
+                          </p>
+
+                          <p>
+                            Functions <br />
+                            <a
+                              href="http://dribbble.com/shots/1216346-Guided-tour-tooltip"
+                              title="Dribbble shot"
+                              target="_blank"
+                              >VCell</a
+                            >
+                          </p>
+
+                          <p>This is the last slide</p>
+                        </div> -->
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="content" id="reactionName">
+                            <li>
+                                Name
+                            </li>
+                        </ul>
+
+                        <ul class="content" id="reactionStructure">
+                            <li>
+                                Structure
+                            </li>
+                        </ul>
+                        <ul class="discussions" id="reactionKinetics">
+                            <li>
+                                Kinetics
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="pages" class="optionData">
+                <h2 class="header">Species & Molecules</h2>
+                <div class="monitor table long">
+                    <h4>Species</h4>
+                    <div class="clearfix">
+                        <ul class="content" id="speciesName">
+                            <li>Name</li>
+                        </ul>
+                        <ul class="content" id="speciesStructure">
+                            <li>Structure</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="monitor table long">
+                    <h4>Molecules</h4>
+                    <div class="clearfix">
+                        <ul class="content">
+                            <li>Name</li>
+                        </ul>
+                        <ul class="content">
+                            <li>Link</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="observables" class="optionData">
+                <h2 class="header">Observables</h2>
+            </div>
+            <div id="applications" class="optionData">
+                <h2 class="header">Applications</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content">
+                            <li>Reaction</li>
+                        </ul>
+                        <ul class="content">
+                            <li>Name</li>
+                        </ul>
+
+                        <ul class="content">
+                            <li>Structure</li>
+                        </ul>
+                        <ul class="discussions">
+                            <li>Kinetics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="links" class="optionData">
+                <h2 class="header">Specifications - Asymmetric Geometry</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content" id="specificationsSpecies">
+                            <li>Species</li>
+                        </ul>
+                        <ul class="content" id="specificationsStructure">
+                            <li>Structure</li>
+                        </ul>
+                        <ul class="content" id="specificationsInitial">
+                            <li>Initial Condition</li>
+                        </ul>
+                        <ul class="discussions" id="specificationsDiffusion">
+                            <li>Diffusion Constant</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comments" class="optionData">
+                <h2 class="header">Specifications - Symmetric Geometry</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content" id="specificationsSpecies">
+                            <li>Species</li>
+                        </ul>
+                        <ul class="content" id="specificationsStructure">
+                            <li>Structure</li>
+                        </ul>
+                        <ul class="content" id="specificationsInitial">
+                            <li>Initial Condition</li>
+                        </ul>
+                        <ul class="discussions" id="specificationsDiffusion">
+                            <li>Diffusion Constant</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="widgets" class="optionData">
+                <h2 class="header">Simulations - Asymmetric Geometry</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content" id="simulationsName">
+                            <li>Name</li>
+                        </ul>
+                        <ul class="content" id="specificationsStructure">
+                            <li>End Time</li>
+                        </ul>
+                        <ul class="content" id="specificationsInitial">
+                            <li>Output Options</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="plugins" class="optionData">
+                <h2 class="header">Simulations - Symmetric Geometry</h2>
+            </div>
+            <div id="functions" class="optionData">
+                <h2 class="header">Functions</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content">
+                            <li>Reaction</li>
+                        </ul>
+                        <ul class="content">
+                            <li>Name</li>
+                        </ul>
+
+                        <ul class="content">
+                            <li>Structure</li>
+                        </ul>
+                        <ul class="discussions">
+                            <li>Kinetics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="users" class="optionData">
+                <h2 class="header">Functions</h2>
+            </div>
+            <div id="tools" class="optionData">
+                <h2 class="header">Parameters</h2>
+            </div>
+            <div id="pathway" class="optionData">
+                <h2 class="header">Pathway</h2>
+                <div class="monitor table large">
+                    <div class="clearfix">
+                        <ul class="content">
+                            <li>Reaction</li>
+                        </ul>
+                        <ul class="content">
+                            <li>Name</li>
+                        </ul>
+
+                        <ul class="content">
+                            <li>Structure</li>
+                        </ul>
+                        <ul class="discussions">
+                            <li>Kinetics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="settings" class="optionData">
+                <h2 class="header">Pathway</h2>
+            </div>
+        </div>
+        <ul class="statusbar">
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li class="profiles-setting"><a href="">s</a></li>
+            <li class="logout"><a href="">k</a></li>
+        </ul>
+    </div>
+</div>
