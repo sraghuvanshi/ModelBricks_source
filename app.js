@@ -5,7 +5,7 @@ const hbs = require("express-handlebars");
 const path = require("path");
 const xml2js = require("xml2js");
 const util = require("util");
-const port = process.env.port || 4000;
+const PORT = process.env.PORT || 4000;
 
 // module.exports = xml2js;
 
@@ -102,9 +102,9 @@ app.get("/model", (req, res) => {
 });
 
 // Server Port
-app.listen(port, (err) => {
+app.listen(PORT, (err) => {
   if (err) {
     return console.log("ERROR", err);
   }
-  console.log(`Listening on port ${port}...`);
+  console.log(`Listening on port ${PORT}...`);
 });
