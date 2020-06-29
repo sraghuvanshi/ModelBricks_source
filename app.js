@@ -5,10 +5,13 @@ const hbs = require("express-handlebars");
 const path = require("path");
 const xml2js = require("xml2js");
 const util = require("util");
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4002;
 
-// module.exports = xml2js;
+var indexRouter = require("./routes/index");
 
+app.use(express.json());
+
+// view engine setup
 app.engine(
   "hbs",
   hbs({
@@ -23,15 +26,18 @@ app.set("view engine", "hbs");
 // fs.readFile("Biomodel_172076998.xml", (err, data) => {
 //   parser.parseString(data, (err, result) => {
 //     // console.dir(util.inspect(result, false, null, true));
-//     console.log("Read finished!");
+//     // console.log("Read finished!");
+//     let data = JSON.stringify(result);
+//     fs.writeFileSync("/public/js/new.json", data);
+//     console.log("file written");
 //   });
 // });
 
 app.get("/data", (req, res) => {
   var parser = new xml2js.Parser();
-  fs.readFile("Biomodel_172076998.xml", (err, data) => {
+  fs.readFile("Biomodel_147699816.xml", (err, data) => {
     parser.parseString(data, (err, result) => {
-      const data = JSON.stringify(result);
+      const data = result;
       res.render("data", {
         title: "ModelBricks - JSON DATA",
         data,
@@ -42,64 +48,51 @@ app.get("/data", (req, res) => {
 
 app.get("/json", (req, res) => {
   var parser = new xml2js.Parser();
-  fs.readFile("Biomodel_172076998.xml", (err, data) => {
+  fs.readFile("Biomodel_147699816.xml", (err, data) => {
     parser.parseString(data, (err, result) => {
       res.send(result);
     });
   });
 });
 
+// single model page
+
+app.get("/curatedList/model", (req, res) => {
+  var parser = new xml2js.Parser();
+  fs.readFile("Biomodel_147699816.xml", (err, data) => {
+    parser.parseString(data, (err, result) => {
+      const data = result;
+      res.render("model", {
+        title: "ModelBricks - Model Page",
+        data,
+      });
+    });
+  });
+});
+
+app.get("/curatedList/model/:id", (req, res) => {
+  var parser = new xml2js.Parser();
+  fs.readFile(
+    "./biomodels/Biomodel_" + req.params.id + ".vcml",
+    (err, data) => {
+      parser.parseString(data, (err, result) => {
+        const data = result;
+        res.render("model", {
+          title: "ModelBricks - Model Page",
+          data,
+        });
+      });
+    }
+  );
+});
+
+// fetching model list
+
 //static pages
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routing
-app.get("/", (req, res) => {
-  res.render("index", {
-    title: "ModelBricks - Home",
-  });
-});
-
-app.get("/about", (req, res) => {
-  res.render("about", {
-    title: "ModelBricks - About",
-  });
-});
-
-app.get("/motivation", (req, res) => {
-  res.render("motivation", {
-    title: "ModelBricks - Motivation",
-  });
-});
-
-app.get("/curatedList", (req, res) => {
-  res.render("curatedList", {
-    title: "ModelBricks - Curated List",
-  });
-});
-
-app.get("/egfr", (req, res) => {
-  res.render("egfr", {
-    title: "ModelBricks - EGFR",
-  });
-});
-
-app.get("/tools", (req, res) => {
-  res.render("tools", {
-    title: "ModelBricks - Tools",
-  });
-});
-
-app.get("/blog", (req, res) => {
-  res.render("blog", {
-    title: "ModelBricks - Blog",
-  });
-});
-
-app.get("/model", (req, res) => {
-  res.render("model", {
-    title: "ModelBricks - Model page",
-  });
-});
+app.use("/", indexRouter);
 
 // Server Port
 app.listen(PORT, (err) => {
@@ -108,3 +101,5 @@ app.listen(PORT, (err) => {
   }
   console.log(`Listening on port ${PORT}...`);
 });
+
+module.exports = app;

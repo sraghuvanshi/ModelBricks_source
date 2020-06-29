@@ -1,9 +1,127 @@
 <!-- section 1 -->
-<div class="section1">
+{{!-- <div class="section1">
     <h2>Curated List Page</h2>
-</div>
+</div> --}}
 
 <!-- section 2 -->
-<div class="section2">
-    <a href="/model">Nosbisch chemotaxis 2020</a>
+{{!-- <div class="section2">
+    <a href="/curatedList/model">Nosbisch chemotaxis 2020</a>
+</div> --}}
+
+{{!-- section 3 --}}
+{{!-- Main sorting table  --}}
+<div class="curatedListTable">
+
+    <h2>Curated Models and Related ModelBricks</h2>
+    <table id="content-table3" class="table-responsive-full sort-table">
+        <thead>
+            <tr>
+                <th class="title">BioModel ID
+                    <div class="sort-table-arrows">
+                        <a href="javascript:sort(true, 'title', 'content-table3');"><button class="button"
+                                title="down arrow"><i class="fa fa-chevron-down"></i></button></a>
+                        <a href="javascript:sort(false, 'title', 'content-table3');"><button class="button"
+                                title="up arrow"><i class="fa fa-chevron-up"></i></button></a>
+                    </div>
+                </th>
+                <th class="composer">BioModel name
+                    <div class="sort-table-arrows">
+                        <a href="javascript:sort(true, 'composer', 'content-table3');"><button class="button"
+                                title="down arrow"><i class="fa fa-chevron-down"></i></button></a>
+                        <a href="javascript:sort(false, 'composer', 'content-table3');"><button class="button"
+                                title="up arrow"><i class="fa fa-chevron-up"></i></button></a>
+                    </div>
+                </th>
+                <th class="lyrics">Owner
+                    <div class="sort-table-arrows">
+                        <a href="javascript:sort(true, 'lyrics', 'content-table3');"><button class="button"
+                                title="down arrow"><i class="fa fa-chevron-down"></i></button></a>
+                        <a href="javascript:sort(false, 'lyrics', 'content-table3');"><button class="button"
+                                title="up arrow"><i class="fa fa-chevron-up"></i></button></a>
+                    </div>
+                </th>
+                <th class="set">Date Saved
+                    <div class="sort-table-arrows">
+                        <a href="javascript:sort(true, 'set', 'content-table3');"><button class="button"
+                                title="down arrow"><i class="fa fa-chevron-down"></i></button></a>
+                        <a href="javascript:sort(false, 'set', 'content-table3');"><button class="button"
+                                title="up arrow"><i class="fa fa-chevron-up"></i></button></a>
+                    </div>
+                </th>
+                <th class="arranger">"Applications" - Simulations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176197427#dashboard">176197427</a></td>
+                <td data-label="Composer" class="composer">CM_PM25628036_MB4::Rho_GDI_binding</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Application" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176196222#dashboard">176196222</a></td>
+                <td data-label="Composer" class="composer">CM_PM25628036_MB3::Rho_GDP_GTP_exchange</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"GDI_integrated" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176195129#dashboard">176195129</a></td>
+                <td data-label="Composer" class="composer">CM_PM25628036_MB1::GEF_activation</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Canonical Application" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176194334#dashboard">176194334</a></td>
+                <td data-label="Composer" class="composer">CM_PM18628746_MB1::Rab5_switch</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Deterministic" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176193046#dashboard">176193046</a></td>
+                <td data-label="Composer" class="composer">CM_PM18628746_MB2::Rab7_switch</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Deterministic" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176191843#dashboard">176191843</a></td>
+                <td data-label="Composer" class="composer">CM_PM12648679_MB10::Substrate_depletion_oscillator</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Deterministic" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176190991#dashboard">176190991</a></td>
+                <td data-label="Composer" class="composer">CM_PM12648679_MB9::Negative_feedback_oscillator</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Deterministic" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176190469#dashboard">176190469</a></td>
+                <td data-label="Composer" class="composer">CM_PM12648679_MB8::Negative_feedback_homeostasis</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Deterministic" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176190123#dashboard">176190123</a></td>
+                <td data-label="Composer" class="composer">CM_PM12648679_MB7::Mutual_inhibition</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Deterministic" - Simulation0</td>
+            </tr>
+            <tr>
+                <td data-label="Title" class="title"><a href="/curatedList/model/176189636#dashboard">176189636</a></td>
+                <td data-label="Composer" class="composer">CM_PM12648679_MB6::Mutual_activation</td>
+                <td data-label="Lyrics" class="lyrics">ModelBrick</td>
+                <td data-label="Set" class="set">Apr 1, 2020</td>
+                <td data-label="Arranger">"Deterministic" - Simulation0</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
