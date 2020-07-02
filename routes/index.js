@@ -19,12 +19,6 @@ router.get("/motivation", (req, res) => {
   });
 });
 
-router.get("/curatedList", (req, res) => {
-  res.render("curatedList", {
-    title: "ModelBricks - Curated List",
-  });
-});
-
 router.get("/egfr", (req, res) => {
   res.render("egfr", {
     title: "ModelBricks - EGFR",
