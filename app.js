@@ -29,7 +29,7 @@ const hbs = exphbs.create({
       var theDate = new Date(timeStamp);
       dateString = theDate.toGMTString();
       date = dateString.slice(5, 16);
-      return date;
+      return dateString;
     },
   },
 });
@@ -98,13 +98,34 @@ app.get("/listData", async (req, res) => {
 });
 
 app.get("/curatedList", async (req, res) => {
+  var bmName = req.query.bmName;
+  var bmId = req.query.bmId;
+  var owner = req.query.owner;
+  var category = req.query.category;
+  var orderBy = req.query.orderBy;
+
   const api_url =
-    "https://vcellapi-beta.cam.uchc.edu:8080/biomodel?bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&startRow=1&maxRows=10&orderBy=date_desc";
+    "https://vcellapi-beta.cam.uchc.edu:8080/biomodel?bmName=" +
+    bmName +
+    "&bmId=" +
+    bmId +
+    "&category=" +
+    category +
+    "&owner=" +
+    owner +
+    "&savedLow=&savedHigh=&startRow=1&maxRows=10&orderBy=date_desc";
+
+  // const api_url =
+  //   "https://vcellapi-beta.cam.uchc.edu:8080/biomodel?bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&startRow=1&maxRows=10&orderBy=date_desc";
   const fetch_response = await fetch(api_url);
   const json = await fetch_response.json();
   res.render("curatedList", {
     title: "ModelBricks - Curated List",
     json,
+    bmId,
+    bmName,
+    owner,
+    category,
   });
 });
 

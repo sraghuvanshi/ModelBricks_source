@@ -9,21 +9,76 @@
 </div> --}}
 
 {{!-- section 3 --}}
-{{!-- Main sorting table  --}}
-<div class="searchBar">
-    <div class="wrap">
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder="Which Biomodel are you looking for?">
-            <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-            </button>
+{{!-- search button  --}}
+{{!-- <div class="searchIcon">
+    <div class="search">
+        <div class="circle">
+            <div class="close-rod"></div>
         </div>
+        <div class="rod"></div>
+    </div>
+    <div class="content">Search</div>
+</div> --}}
+<h2 class="sectionHeading">Curated Models and Related ModelBricks</h2>
+<div class="searchBtn drop">
+    <div class="container dropTitle">
+        <input type="text" name="" placeholder="Search...">
+        <div class="search"></div>
     </div>
 </div>
+{{!-- searching form  --}}
+<div class="searchForm subMenu">
+    <form action="/curatedList" method="GET" id="custom-form" class="custom-form">
+        <div class="custom-form__group">
+            <input type="text" name="bmName" id="bmName" placeholder="BioModel name" value="{{bmName}}">
+            <label class="group__label" for="name">Name</label>
+        </div>
+        <div class="custom-form__group">
+            <input type="number" name="bmId" id="bmId" placeholder="BioModel ID" value="{{bmId}}">
+            <label class="group__label" for="bioModelID">BioModel ID</label>
+        </div>
+        <div class="custom-form__group">
+            <input type="text" name="owner" id="owner" placeholder="Filter by owner" value="ModelBrick">
+            <label class="group__label" for="name">Owner</label>
+        </div>
 
+        <div id="datalist" class="custom-form__group datalist">
+            <input autocomplete="off" id="datalist-input" class="datalist-input" type="text" name="category"
+                title="Choose wisely" placeholder="Select category" value="all">
+            <label class="group__label" for="datalist-input">Category</label>
+            {{!-- <i class="datalist-icon icon iconfont icon-arrow"></i> --}}
+            <ul id="datalist-ul" class="datalist-ul"></ul>
+        </div>
+        {{!-- <div class="custom-form__group">
+            <input onblur="formataCPF(this)" oninput="mascara(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" type="text"
+                name="cpf" id="cpf-input" placeholder="Digite seu CPF" required inputmode="numeric"
+                title="Digite um CPF no formato: nnn.nnn.nnn-nn">
+            <label class="group__label" for="cpf-input">CPF</label>
+        </div> --}}
+        <fieldset class="custom-form__fieldset custom-form__fieldset--full">
+            <legend class="custom-form__legend">Sort by</legend>
+            <input id="a-check" type="checkbox" name="orderBy" checked="true">
+            <label for="a-check">Newest first</label>
+            <input id="b-check" type="checkbox" name="orderBy">
+            <label for="b-check">Oldest first</label>
+            <input id="c-check" type="checkbox" name="orderBy">
+            <label for="c-check">Alphabatical (A-Z)</label>
+            <input id="d-check" type="checkbox" name="orderBy">
+            <label for="d-check">Reverse alphabatical (Z-A)</label>
+        </fieldset>
+        <button type="submit" class="custom-form__submit">
+            Search
+            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" /></svg>
+        </button>
+    </form>
+</div>
+
+{{!-- Main sorting table  --}}
 <div class="curatedListTable">
 
-    <h2>Curated Models and Related ModelBricks</h2>
+
     <table id="content-table3" class="table-responsive-full sort-table">
         <thead>
             <tr>
