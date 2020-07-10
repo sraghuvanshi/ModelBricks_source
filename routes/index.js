@@ -37,4 +37,22 @@ router.get("/blog", (req, res) => {
   });
 });
 
+router.get("/search1", (req, res) => {
+  res.render("search1", {
+    title: "ModelBricks - search",
+  });
+});
+
+router.get("/search2", (req, res) => {
+  res.render("search2", {
+    title: "ModelBricks - search",
+  });
+});
+
+router.get("/search3", (req, res) => {
+  res.render("search3", {
+    title: "ModelBricks - search",
+  });
+});
+
 module.exports = router;
