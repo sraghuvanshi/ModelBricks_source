@@ -1711,8 +1711,7 @@ li.card {
   #banner-bkgrd {
     /*  A photo by Drew Coffman, available at https://unsplash.com/photos/D1Pa78SnrH0 */
     // background-image: url("https://rawgit.com/tomchkk/fcc-project-images/master/wikipedia-search-engine/angled-books-1920x1080.optmzd.jpg");
-    background-image: url("https://images.unsplash.com/photo-1575503802870-45de6a6217c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80");
-
+    // background-image: url("https://images.unsplash.com/photo-1575503802870-45de6a6217c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -1727,12 +1726,13 @@ li.card {
 
   #banner-overlay {
     background-color: rgba(24, 148, 179, 0.75);
+    height: 90%;
   }
 
   #banner-bkgrd,
   #banner-overlay,
   #search-container {
-    position: fixed;
+    position: absolute;
     height: 75%;
     width: 100%;
     transition: height 100ms ease-in;
