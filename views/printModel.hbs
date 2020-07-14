@@ -1,0 +1,319 @@
+<div class="sectionDescription">
+    {{#each data.vcml.BioModel}}
+    {{#each this.Version}}
+    <h2>Name - <span>{{this.$.Name}}</span></h2>
+    <h2>BioModel ID - <span>{{this.$.KeyValue}}</span></h2>
+    {{/each}}
+    {{/each}}
+</div>
+
+<div class="rxnDiagram">
+    <h2 class="sectionTitle">Reaction Diagram</h2>
+    {{#each data.vcml.BioModel}}
+    {{#each this.Version}}
+    <img class="image-zoom-available" src="https://vcellapi-beta.cam.uchc.edu:8080/biomodel/{{this.$.KeyValue}}/diagram"
+        alt="reactionDiagram" draggable="false" />
+    {{/each}}
+    {{/each}}
+</div>
+
+<h2 class="sectionTitle">Physiology</h2>
+{{!-- reactions table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Reactions</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Reaction</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Structure</th>
+                    <th scope="col">Kinetics</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.SimpleReaction}}
+                <tr>
+                    <td data-title="Reaction">
+                        {{#each this.Reactant}}
+                        {{this.$.LocalizedCompoundRef}}
+                        {{/each}}
+                        <span style="color:#666666">--></span>
+                        {{#each this.Product}}
+                        {{this.$.LocalizedCompoundRef}}
+                        {{/each}}
+                    </td>
+                    <td data-title="Name">{{this.$.Name}}</td>
+                    <td data-title="Structure"> {{this.$.Structure}}</td>
+                    <td data-title="Kinetics">
+                        {{#each this.Kinetics}}
+                        {{this.$.KineticsType}}
+                        {{/each}}
+                    </td>
+                </tr>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{!-- Structures table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Structures</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Electrical (Membrane Polarity)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.Membrane}}
+                <tr>
+                    <td data-title="Name">{{this.$.Name}}</td>
+                    <td data-title="Type">Membrane</td>
+                    <td data-title="Electrical">{{this.$.PositiveFeature}}(+) &nbsp; {{this.$.NegativeFeature}}(-)</td>
+                </tr>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.Feature}}
+                <tr>
+                    <td data-title="Name">{{this.$.Name}}</td>
+                    <td data-title="Type">Compartment</td>
+                    <td data-title="Electrical">{{this.$.PositiveFeature}}(+) &nbsp; {{this.$.NegativeFeature}}(-)</td>
+                </tr>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{{!-- Species table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Species</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Structure</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.LocalizedCompound}}
+                <tr>
+                    <td data-title="Name">{{this.$.Name}}</td>
+                    <td data-title="Structure"> {{this.$.Structure}}</td>
+                </tr>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{!-- Molecules table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Molecules</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Link</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.LocalizedCompound}}
+                <tr>
+                    <td data-title="Name">{{this.$.Name}}</td>
+                    <td data-title="Link"> {{this.$.Structure}}</td>
+                </tr>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{!-- Observables table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Observables</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">BioNetGen Defination</th>
+                    <th scope="col">Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-title="Name">name</td>
+                    <td data-title="Type">type</td>
+                    <td data-title="BioNetGen Defination">bioNetGen defination</td>
+                    <td data-title="Count">count</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<hr>
+
+<h2 class="sectionTitle">Applications</h2>
+{{!-- Applications table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Applications</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Math Type</th>
+                    <th scope="col">Annotation</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data.vcml.BioModel}}
+                {{#each this.SimulationSpec as |value key|}}
+                <tr>
+                    <td data-title="Name">{{value.$.Name}}</td>
+                    <td data-title="Math Type"></td>
+                    <td data-title="Annotation">{{value.Annotation}}</td>
+                </tr>
+
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{!-- for each application  --}}
+{{#each data.vcml.BioModel}}
+{{#each this.SimulationSpec as |value key|}}
+<h2 class="sectionTitle">{{key}} - {{value.$.Name}}</h2>
+
+{{!-- specifications table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Specifications - {{value.$.Name}}</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Species</th>
+                    <th scope="col">Structure</th>
+                    <th scope="col">Initial Condition</th>
+                    <th scope="col">Diffusion Constant</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each value.ReactionContext}}
+                {{#each this.LocalizedCompoundSpec}}
+                <tr>
+                    <td data-title="Species">{{this.$.LocalizedCompoundRef}}</td>
+                    <td data-title="Structure"></td>
+                    <td data-title="Initial Condition">{{this.InitialConcentration}}</td>
+                    <td data-title="Diffusion Constant">{{this.Diffusion}}</td>
+                </tr>
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{!-- Simulations table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Simulations - {{value.$.Name}}</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Output Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each value.Simulation}}
+                <tr>
+                    <td data-title="Name">{{ this.$.Name}}</td>
+                    {{#each this.SolverTaskDescription}}
+                    {{#each this.TimeBound}}
+                    <td data-title="End Time">{{ this.$.EndTime}}</td>
+                    {{/each}}
+                    {{#each this.OutputOptions}}
+                    <td data-title="Output Options">every {{ this.$.OutputTimeStep}}</td>
+                    {{/each}}
+                    {{/each}}
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{{/each}}
+{{/each}}
+
+<hr>
+<h2 class="sectionTitle">Global Parameters</h2>
+
+{{!-- Global Parameters table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <caption>Global Parameters</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Expression</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.ModelParameters}}
+                {{#each this.Parameter}}
+                <tr>
+                    <td data-title="Name">{{ this.$.Name}}</td>
+                    <td data-title="Expression">{{this._}}</td>
+                </tr>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

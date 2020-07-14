@@ -51,7 +51,7 @@ app.set("view engine", "hbs");
 
 app.get("/data", (req, res) => {
   var parser = new xml2js.Parser();
-  fs.readFile("Biomodel_147699816.xml", (err, data) => {
+  fs.readFile("./biomodels/Biomodel_176197427.vcml", (err, data) => {
     parser.parseString(data, (err, result) => {
       const data = result;
       res.render("data", {
@@ -64,7 +64,7 @@ app.get("/data", (req, res) => {
 
 app.get("/json", (req, res) => {
   var parser = new xml2js.Parser();
-  fs.readFile("Biomodel_147699816.xml", (err, data) => {
+  fs.readFile("./biomodels/Biomodel_176197427.vcml", (err, data) => {
     parser.parseString(data, (err, result) => {
       res.send(result);
     });
@@ -138,6 +138,22 @@ app.get("/curatedList/model/:id", (req, res) => {
         const data = result;
         res.render("model", {
           title: "ModelBricks - Model Page",
+          data,
+        });
+      });
+    }
+  );
+});
+
+app.get("/curatedList/printModel/:id", (req, res) => {
+  var parser = new xml2js.Parser();
+  fs.readFile(
+    "./biomodels/Biomodel_" + req.params.id + ".vcml",
+    (err, data) => {
+      parser.parseString(data, (err, result) => {
+        const data = result;
+        res.render("printModel", {
+          title: "ModelBricks - Model Print Page",
           data,
         });
       });
