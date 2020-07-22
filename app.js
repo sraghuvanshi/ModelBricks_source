@@ -2,6 +2,7 @@ const fs = require("fs");
 const express = require("express");
 const app = express();
 const exphbs = require("express-handlebars");
+const handlebars = require("handlebars");
 const path = require("path");
 const xml2js = require("xml2js");
 const util = require("util");
@@ -152,6 +153,16 @@ app.get("/curatedList/printModel/:id", (req, res) => {
     (err, data) => {
       parser.parseString(data, (err, result) => {
         const data = result;
+        // generating static html pages in ./public/html
+        var template = handlebars.compile(
+          fs.readFileSync("./temp/modelTemplate.html", "utf8")
+        );
+        var generated = template({ data: data });
+        fs.writeFileSync(
+          "./public/html/" + "model_" + req.params.id + ".html",
+          generated,
+          "utf-8"
+        );
         res.render("printModel", {
           title: "ModelBricks - Model Print Page",
           data,
@@ -160,8 +171,6 @@ app.get("/curatedList/printModel/:id", (req, res) => {
     }
   );
 });
-
-// fetching model list
 
 //static pages
 app.use(express.static(path.join(__dirname, "public")));
