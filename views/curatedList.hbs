@@ -14,44 +14,11 @@
 
 {{!-- searching form  --}}
 <div class="searchForm subMenu">
-    <form action="/curatedList" method="GET" id="custom-form" class="custom-form">
+    <form action="/curatedList/search" method="GET" id="custom-form" class="custom-form">
         <div class="custom-form__group">
             <input type="text" name="bmName" id="bmName" placeholder="BioModel name" value="{{bmName}}">
             <label class="group__label" for="name">Name</label>
         </div>
-        <div class="custom-form__group">
-            <input type="number" name="bmId" id="bmId" placeholder="BioModel ID" value="{{bmId}}">
-            <label class="group__label" for="bioModelID">BioModel ID</label>
-        </div>
-        <div class="custom-form__group">
-            <input type="text" name="owner" id="owner" placeholder="Filter by owner" value="ModelBrick">
-            <label class="group__label" for="name">Owner</label>
-        </div>
-
-        <div id="datalist" class="custom-form__group datalist">
-            <input autocomplete="off" id="datalist-input" class="datalist-input" type="text" name="category"
-                title="Choose wisely" placeholder="Select category" value="all">
-            <label class="group__label" for="datalist-input">Category</label>
-            {{!-- <i class="datalist-icon icon iconfont icon-arrow"></i> --}}
-            <ul id="datalist-ul" class="datalist-ul"></ul>
-        </div>
-        {{!-- <div class="custom-form__group">
-            <input onblur="formataCPF(this)" oninput="mascara(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" type="text"
-                name="cpf" id="cpf-input" placeholder="Digite seu CPF" required inputmode="numeric"
-                title="Digite um CPF no formato: nnn.nnn.nnn-nn">
-            <label class="group__label" for="cpf-input">CPF</label>
-        </div> --}}
-        <fieldset class="custom-form__fieldset custom-form__fieldset--full">
-            <legend class="custom-form__legend">Sort by</legend>
-            <input id="a-check" type="checkbox" name="orderBy" checked="true">
-            <label for="a-check">Newest first</label>
-            <input id="b-check" type="checkbox" name="orderBy">
-            <label for="b-check">Oldest first</label>
-            <input id="c-check" type="checkbox" name="orderBy">
-            <label for="c-check">Alphabatical (A-Z)</label>
-            <input id="d-check" type="checkbox" name="orderBy">
-            <label for="d-check">Reverse alphabatical (Z-A)</label>
-        </fieldset>
         <button type="submit" class="custom-form__submit">
             Search
             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"

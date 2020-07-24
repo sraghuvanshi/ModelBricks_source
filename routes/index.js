@@ -38,7 +38,7 @@ router.get("/blog", (req, res) => {
 });
 
 router.get("/search", (req, res) => {
-  res.render("search", {
+  res.render("googleSearch", {
     title: "ModelBricks - search",
   });
 });

@@ -1330,6 +1330,7 @@ li.card {
   background-color: white;
   padding: 30px 20px;
   border-radius: 3px;
+  width: 90%;
 }
 
 .searchForm .custom-form input {
@@ -1360,7 +1361,7 @@ li.card {
 }
 
 .searchForm .custom-form .custom-form__submit svg {
-  color: var(--cor-acentuado);
+  color: var(--cor-sucesso);
   margin-left: 15px;
 }
 
@@ -1368,8 +1369,9 @@ li.card {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: var(--cor-secundaria);
-  color: white;
+  background-color: white;
+  border: 1px solid var(--cor-sucesso);
+  color: var(--cor-sucesso);
   padding: 15px;
   font-size: 12px;
   text-transform: uppercase;
@@ -1383,6 +1385,17 @@ li.card {
           justify-content: center;
   position: relative;
   cursor: pointer;
+  -webkit-transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease;
+}
+
+.searchForm .custom-form .custom-form__submit:hover {
+  background-color: var(--cor-sucesso);
+  color: white;
+}
+
+.searchForm .custom-form .custom-form__submit:hover svg {
+  color: white;
 }
 
 .searchForm .custom-form .custom-form__submit:disabled {
@@ -2370,5 +2383,28 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
 .rxnDiagram img {
   width: 100%;
   height: 100%;
+}
+
+.gcs-heading {
+  color: #333333;
+  font-size: 1.9em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  margin: 40px;
+}
+
+.googleSearch {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background-color: rgba(24, 148, 179, 0.726);
+  height: 20vh;
+  padding: 30px 200px;
+}
+
+@media (max-width: 768px) {
+  .googleSearch {
+    padding: 30px 0px;
+  }
 }
 /*# sourceMappingURL=style.css.map */
