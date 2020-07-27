@@ -30,11 +30,28 @@ const hbs = exphbs.create({
         return passedString;
       }
     },
+    trimVcid: function (passedString) {
+      if (passedString.includes("(")) {
+        var indexToSlice = passedString.indexOf("(") + 1;
+        var length = passedString.length - 1;
+        var theString = passedString.slice(indexToSlice, length);
+        return theString;
+      } else {
+        return passedString;
+      }
+    },
     toDate: function (timeStamp) {
       var theDate = new Date(timeStamp);
       dateString = theDate.toGMTString();
       date = dateString.slice(5, 16);
       return dateString;
+    },
+    ifvalue: function (conditional, options) {
+      if (options.hash.value === conditional) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
     },
   },
 });

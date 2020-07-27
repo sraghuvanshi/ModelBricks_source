@@ -58,7 +58,7 @@
     <div class="main">
         <ul class="topbar clearfix">
             {{#each data.vcml.BioModel}}
-            <li><a id="modelName" href="#">{{this.$.Name}}</a></li>
+            <li><a id="modelName" href="#">{{trimString this.$.Name}}</a></li>
             {{#each this.Version}}
             <li><a href="/curatedList/printModel/{{this.$.KeyValue}}"><i class="fa fa-print" aria-hidden="true"></i></a>
             </li>

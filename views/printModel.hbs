@@ -46,7 +46,7 @@
                         {{this.$.LocalizedCompoundRef}}
                         {{/each}}
                     </td>
-                    <td data-title="Name">{{this.$.Name}}</td>
+                    <td data-title="Name"><a href="#{{this.$.Name}}">{{this.$.Name}}</a></td>
                     <td data-title="Structure"> {{this.$.Structure}}</td>
                     <td data-title="Kinetics">
                         {{#each this.Kinetics}}
@@ -121,7 +121,7 @@
                 {{#each this.Model}}
                 {{#each this.LocalizedCompound}}
                 <tr>
-                    <td data-title="Name">{{this.$.Name}}</td>
+                    <td data-title="Name"><a href="#{{this.$.Name}}">{{this.$.Name}}</a></td>
                     <td data-title="Structure"> {{this.$.Structure}}</td>
                 </tr>
                 {{/each}}
@@ -140,18 +140,37 @@
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Link</th>
+                    <th scope="col">Description</th>
                 </tr>
             </thead>
             <tbody>
 
                 {{#each data.vcml.BioModel}}
                 {{#each this.Model}}
-                {{#each this.LocalizedCompound}}
+                {{#each this.RbmModelContainer}}
+                {{#each this.MolecularTypeList}}
+                {{#each this.MolecularType}}
+
                 <tr>
-                    <td data-title="Name">{{this.$.Name}}</td>
-                    <td data-title="Link"> {{this.$.Structure}}</td>
+                    <td data-title="Name"><a href="#{{this.$.Name}}">{{this.$.Name}}</a></td>
+
+                    <td data-title="Description">
+                        {{#each this.MolecularComponent}}
+                        {{this.$.Name}}
+                        {{#if this.AllowableState}}
+                        {{#each this.AllowableState}}
+                        ~{{this.$.Name}}
+                        {{/each}}
+                        {{/if}}
+                        .
+                        {{/each}}
+
+                    </td>
+
                 </tr>
+
+                {{/each}}
+                {{/each}}
                 {{/each}}
                 {{/each}}
                 {{/each}}
@@ -308,6 +327,36 @@
                 <tr>
                     <td data-title="Name">{{ this.$.Name}}</td>
                     <td data-title="Expression">{{this._}}</td>
+                </tr>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<h2 class="sectionTitle">Annotations</h2>
+
+{{!-- Annotations table  --}}
+<div class="pmTable">
+    <div class="container">
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th scope="col">vcid</th>
+                    <th scope="col">Annotation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data.vcml.BioModel}}
+                {{#each this.vcmetadata}}
+                {{#each this.nonrdfAnnotationList}}
+                {{#each this.nonrdfAnnotation}}
+                <tr>
+                    <td data-title="Name" id={{trimVcid this.$.vcid}}>{{trimVcid this.$.vcid}}</td>
+                    <td data-title="Expression">{{this.freetext}}</td>
                 </tr>
                 {{/each}}
                 {{/each}}

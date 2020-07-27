@@ -10,6 +10,21 @@
 {{!-- Model name  --}}
 {{#each data.vcml.BioModel}}
 <h1>{{this.$.Name}}</h1>
+{{#ifvalue this.$.Name value="CM_PM25628036_MB3::Rho_GDP_GTP_exchange"}}
+<h2>IF condition is working</h2>
+{{/ifvalue}}
+{{/each}}
+
+{{#each data.vcml.BioModel}}
+{{#each this.vcmetadata}}
+{{#each this.nonrdfAnnotationList}}
+{{#each this.nonrdfAnnotation}}
+{{#ifvalue this.$.vcid value="ReactionStep(Effector_activation)"}}
+<h2>{{this.freetext}}</h2>
+{{/ifvalue}}
+{{/each}}
+{{/each}}
+{{/each}}
 {{/each}}
 
 <br>
