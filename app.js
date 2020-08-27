@@ -7,6 +7,7 @@ const path = require("path");
 const xml2js = require("xml2js");
 const util = require("util");
 const fetch = require("node-fetch");
+const htmlparser2 = require("htmlparser2");
 const PORT = process.env.PORT || 4002;
 
 var indexRouter = require("./routes/index");
@@ -53,6 +54,15 @@ const hbs = exphbs.create({
         return options.inverse(this);
       }
     },
+    nullCheck: function (inputString) {
+      var string = inputString;
+      if (string) {
+        return string;
+      } else {
+        string = "Null";
+        return string;
+      }
+    },
   },
 });
 
@@ -86,15 +96,25 @@ app.get("/data", (req, res) => {
 
 app.get("/json", (req, res) => {
   var parser = new xml2js.Parser();
-  fs.readFile("./biomodels/Biomodel_176196222.vcml", (err, data) => {
+  fs.readFile("./biomodels/Biomodel_172076998.vcml", (err, data) => {
     parser.parseString(data, (err, result) => {
       res.send(result);
     });
   });
 });
+app.get("/ajson", (req, res) => {
+  var parser = new xml2js.Parser();
+  fs.readFile(
+    "./annotations/CM_PM12648679_MB5__Activator_inhibitor_annotations.xml",
+    (err, data) => {
+      parser.parseString(data, (err, result) => {
+        res.send(result);
+      });
+    }
+  );
+});
 
 // single model page
-
 app.get("/curatedList/model", (req, res) => {
   var parser = new xml2js.Parser();
   fs.readFile("Biomodel_147699816.xml", (err, data) => {
@@ -148,16 +168,28 @@ app.get("/curatedList/search", async (req, res) => {
 });
 
 app.get("/curatedList/model/:id", (req, res) => {
+  // var info = "null";
   var parser = new xml2js.Parser();
   fs.readFile(
     "./biomodels/Biomodel_" + req.params.id + ".vcml",
     (err, data) => {
       parser.parseString(data, (err, result) => {
-        const data = result;
+        data = result;
         res.render("model", {
           title: "ModelBricks - Model Page",
           data,
         });
+      });
+    }
+  );
+  var parser = new xml2js.Parser();
+  fs.readFile(
+    "./annotations/CM_PM18628746_MB1__Rab5_switch_annotations.xml",
+    (err, data) => {
+      parser.parseString(data, (err, result) => {
+        info = result;
+        let jsonData = JSON.stringify(info);
+        fs.writeFileSync("./public/json/" + "annotations" + ".json", jsonData);
       });
     }
   );
@@ -180,6 +212,48 @@ app.get("/curatedList/printModel/:id", (req, res) => {
           generated,
           "utf-8"
         );
+
+        let annotations = [];
+        // html parser
+        // Traversing Annotaions
+        // data.vcml.BioModel[0].vcmetadata[0].nonrdfAnnotationList[0].nonrdfAnnotation.forEach(
+        //   function (item) {
+        //     const parser = new htmlparser2.Parser(
+        //       {
+        //         onopentag(name, attribs) {
+        //           if (name === "script" && attribs.type === "text/javascript") {
+        //             console.log("JS! Hooray!");
+        //           }
+        //         },
+        //         ontext(text) {
+        //           if (text.length > 10) {
+        //             console.log(text);
+        //             text.trim();
+        //             text.replace(/\r?\n|\r/g, "");
+        //             annotations.push({ vcid: item.$.vcid, annotation: text });
+        //             // console.log(annotations);
+
+        //             let jsonData = JSON.stringify(annotations);
+        //             fs.writeFileSync(
+        //               "./public/json/" + "model" + ".json",
+        //               jsonData
+        //             );
+        //           }
+        //         },
+        //         onclosetag(tagname) {
+        //           if (tagname === "html") {
+        //             console.log("Done");
+        //           }
+        //         },
+        //       },
+        //       { decodeEntities: true }
+        //     );
+
+        //     parser.write(item.freetext);
+        //     parser.end();
+        //   }
+        // );
+
         res.render("printModel", {
           title: "ModelBricks - Model Print Page",
           data,

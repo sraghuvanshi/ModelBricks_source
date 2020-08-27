@@ -1,3 +1,7 @@
+<div id="fade" class="popupOverlay"></div>
+{{#each info.vcml.BioModel}}
+<h1>{{this.$.Name}}</h1>
+{{/each}}
 <div class="admin-panel clearfix">
     <div class="slidebar">
         <div class="logo">
@@ -5,20 +9,24 @@
         </div>
         <ul>
             <li class="drop">
-                <a href="#physiology" class="dropTitle"><i class="fa fa-folder-o static" aria-hidden="true"></i>
+                <a href="#dashboard" class="dropTitle"><i class="fa fa-folder-o static" aria-hidden="true"></i>
                     Physiology<i class="fa fa-angle-up dynamic"></i>
                 </a>
                 <ul class="subMenu active">
-                    <li><a href="#dashboard" id="targeted"><i class="fa fa-file-text-o static"
+                    <li><a href="#dashboard" id="targeted"><i class="fa fa-picture-o static"
                                 aria-hidden="true"></i>Reaction
                             Diagram</a></li>
-                    <li><a href="#posts"><i class="fa fa-file-text-o static" aria-hidden="true"> </i>Reactions</a></li>
-                    <li><a href="#media"><i class="fa fa-file-text-o static" aria-hidden="true"> </i>Structures</a></li>
-                    <li><a href="#pages"><i class="fa fa-file-text-o static" aria-hidden="true"> </i>Species &
-                            Molecules</a>
+                    <li><a href="#reactions"><i class="fa fa-flask static" aria-hidden="true"></i>Reactions</a>
                     </li>
-                    <li><a href="#observables"><i class="fa fa-file-text-o static" aria-hidden="true">
-                            </i>Observables</a></li>
+                    <li><a href="#structures"><i class="fa fa-codepen static" aria-hidden="true"></i>Structures</a>
+                    </li>
+                    <li><a href="#species"><i class="fa fa-link static" aria-hidden="true"></i>
+                            Species</a>
+                    </li>
+                    <li><a href="#molecules"><i class="fa fa-empire static" aria-hidden="true"></i>Molecules</a>
+                    </li>
+                    <li><a href="#observables"><i class="fa fa-eercast static" aria-hidden="true"></i>Observables</a>
+                    </li>
                 </ul>
             </li>
             <li class="drop">
@@ -29,14 +37,15 @@
                     {{#each data.vcml.BioModel}}
                     {{#each this.SimulationSpec as |value key|}}
                     <li class="drop child">
-                        <a class="dropTitle"><i class="fa fa-folder-o static" aria-hidden="true"></i>
+                        <a href="#specifications{{key}}" class="dropTitle"><i class="fa fa-folder-o static"
+                                aria-hidden="true"></i>
                             <span class="wordLimit">{{value.$.Name}}</span><i class="fa fa-angle-down dynamic"></i>
                         </a>
                         <ul class="subMenu">
-                            <li><a href="#specifications{{key}}"><i class="fa fa-file-text-o static" aria-hidden="true">
-                                    </i>Specifications</a></li>
-                            <li><a href="#simulations{{key}}"><i class="fa fa-file-text-o static" aria-hidden="true">
-                                    </i>Simulations</a></li>
+                            <li><a href="#specifications{{key}}"><i class="fa fa-pencil-square-o static"
+                                        aria-hidden="true"></i>Specifications</a></li>
+                            <li><a href="#simulations{{key}}"><i class="fa fa-superpowers static"
+                                        aria-hidden="true"></i>Simulations</a></li>
                         </ul>
                     </li>
                     {{/each}}
@@ -44,13 +53,9 @@
                 </ul>
             </li>
             <li class="drop">
-                <a href="#tools" class="dropTitle"><i class="fa fa-folder-o static" aria-hidden="true"></i>
-                    Parameters <i class="fa fa-angle-down dynamic"></i>
+                <a href="#global" class="dropTitle"><i class="fa fa-globe static" aria-hidden="true"></i>
+                    Global Parameters
                 </a>
-                <ul class="subMenu">
-                    <li><a href="#tools"><i class="fa fa-file-text-o static" aria-hidden="true"></i>Global
-                            Parameters</a></li>
-                </ul>
             </li>
         </ul>
     </div>
@@ -58,9 +63,10 @@
     <div class="main">
         <ul class="topbar clearfix">
             {{#each data.vcml.BioModel}}
-            <li><a id="modelName" href="#">{{trimString this.$.Name}}</a></li>
             {{#each this.Version}}
-            <li><a href="/curatedList/printModel/{{this.$.KeyValue}}"><i class="fa fa-print" aria-hidden="true"></i></a>
+            <li><a id="modelName" href="#dashboard">{{trimString this.$.Name}} - {{this.$.KeyValue}}</a></li>
+            <li class="printable"><a href="/curatedList/printModel/{{this.$.KeyValue}}"><i class="fa fa-print"
+                        aria-hidden="true"></i></a>
             </li>
             {{/each}}
             {{/each}}
@@ -71,73 +77,10 @@
         <div class="mainContent clearfix">
             <div id="physiology" class="optionData">
                 <h2 class="header">Physiology</h2>
-                <div class="monitor table large">
-                    <div class="clearfix">
-                        <ul class="content" id="reactionReaction">
-                            <li> Reaction </li>
 
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.SimpleReaction}}
-                            <li class="card">
-                                {{#each this.Reactant}}
-                                {{this.$.LocalizedCompoundRef}}
-                                {{/each}}
-                                <span style="color:#666666">--></span>
-                                {{#each this.Product}}
-                                {{this.$.LocalizedCompoundRef}}
-                                {{/each}}
-                            </li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-
-                        </ul>
-                        <ul class="content" id="reactionName">
-                            <li>Name</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.SimpleReaction}}
-                            <li>{{this.$.Name}} </li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-
-                        <ul class="content" id="reactionStructure">
-                            <li>Structure</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.SimpleReaction}}
-                            <li>{{this.$.Structure}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                        <ul class="discussions" id="reactionKinetics">
-                            <li>Kinetics</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.SimpleReaction}}
-                            {{#each this.Kinetics}}
-                            <li>{{this.$.KineticsType}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-                <div class="monitor table small">
-                    <h4>Publications</h4>
-                </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p>Annotaion</p>
-                    {{/each}}
-                </div>
             </div>
+
+            {{!-- Reaction Diagram  --}}
             <div id="dashboard" class="optionData">
                 <h2 class="header"><span class="icon"></span>Reaction Diagram</h2>
                 <div class="reactionDiagram" id="diagram">
@@ -150,7 +93,7 @@
                     {{/each}}
 
                 </div>
-                <div class="monitor table small">
+                {{!-- <div class="monitor table small">
                     <h4>Publications</h4>
                 </div>
                 <div class="monitor table small">
@@ -158,399 +101,860 @@
                     {{#each data.vcml.BioModel}}
                     <p id="annotation">{{this.Annotation}}</p>
                     {{/each}}
-                </div>
-            </div>
-            <div id="media" class="optionData">
-                <h2 class="header">Structures</h2>
-                <div class="monitor table large">
-                    <div class="clearfix">
-                        <ul class="content" id="structureName">
-                            <li>Name</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.Membrane}}
-                            <li>{{this.$.Name}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.Feature}}
-                            <li>{{this.$.Name}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                        <ul class="discussions" id="structureType">
-                            <li>Type</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.Membrane}}
-                            <li>Membrane</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.Feature}}
-                            <li>Compartment</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                        <ul class="discussions" id="structurePolarity">
-                            <li>Electrical (Membrane Polarity)</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.Membrane}}
-                            <li>{{this.$.PositiveFeature}}(+) &nbsp; {{this.$.NegativeFeature}}(-)</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
+                </div> --}}
+
+                {{!--info Reaction Diagram--}}
+
+                <div class="box-diagram">
+                    <div class='popup-text'>
+                        <div class="publications" id="globalPublications">
+                        </div>
+                        <div class="annotations" id="globalAnnotations">
+                        </div>
                     </div>
                 </div>
-                <div class="monitor table small">
-                    <h4>Publications</h4>
-                </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p>Annotaion</p>
-                    {{/each}}
-                </div>
+
+                {{!-- popup --}}
             </div>
-            <div id="posts" class="optionData">
+
+            {{!-- Rections Table  --}}
+            <div id="reactions" class="optionData">
                 <h2 class="header">Reactions</h2>
-                <div class="monitor table large">
-                    <div class="clearfix">
-                        <ul class="content" id="reactionReaction">
-                            <li> Reaction </li>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Reactions">Reactions
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Reactions', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Reactions', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Name">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Structure">Structure
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Structure', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Structure', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Kinetics">Kinetics
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Kinetics', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Kinetics', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data.vcml.BioModel}}
+                            {{#each this.Model}}
+                            {{#each this.SimpleReaction as |value key|}}
+                            <tr>
+                                <td data-label="Reactions" class="Reactions">
+                                    {{#each value.Reactant}}
+                                    {{nullCheck this.$.LocalizedCompoundRef}}
+                                    {{/each}}
+                                    <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                    {{#each value.Product}}
+                                    {{this.$.LocalizedCompoundRef}}
+                                    {{/each}}
+                                </td>
+                                <td data-label="Name" class="Name"><a id={{value.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{value.$.Name}}<i class="fa fa-info"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+                                <td data-label="Structure" class="Structure">{{value.$.Structure}}</td>
+                                {{#each value.Kinetics}}
+                                <td data-label="Kinetics" class="Kinetics"><a id="{{value.$.Name}}-expression"
+                                        onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.KineticsType}}<i
+                                            class="fa fa-superscript"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+                                {{/each}}</td>
+                            </tr>
 
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.SimpleReaction}}
-                            <li class="card">
-                                {{#each this.Reactant}}
-                                {{this.$.LocalizedCompoundRef}}
-                                {{/each}}
-                                <span style="color:#666666">--></span>
-                                {{#each this.Product}}
-                                {{this.$.LocalizedCompoundRef}}
-                                {{/each}}
-                            </li>
                             {{/each}}
                             {{/each}}
                             {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{!-- popup reactions --}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.SimpleReaction as |value key|}}
+                <div class="popup box-{{value.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
 
-                        </ul>
-                        <ul class="content" id="reactionName">
-                            <li>Name</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.SimpleReaction}}
-                            <li>{{this.$.Name}} </li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
+                        {{!-- annotation --}}
+                        <h2>Text Annotations</h2>
+                        <p>Annotations will come here</p>
 
-                        <ul class="content" id="reactionStructure">
-                            <li>Structure</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.SimpleReaction}}
-                            <li>{{this.$.Structure}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                        <ul class="discussions" id="reactionKinetics">
-                            <li>Kinetics</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.SimpleReaction}}
-                            {{#each this.Kinetics}}
-                            <li>{{this.$.KineticsType}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
+                        {{!-- universal ID's  --}}
+                        <h2>Universal ID's</h2>
+                        <p>RFID | pubmed</p>
+
                     </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
                 </div>
-                <div class="monitor table small">
-                    <h4>Publications</h4>
-                </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p>Annotaion</p>
-                    {{/each}}
-                </div>
-            </div>
-            <div id="pages" class="optionData">
-                <h2 class="header">Species & Molecules</h2>
-                <div class="monitor table long">
-                    <h4>Species</h4>
-                    <div class="clearfix">
-                        <ul class="content" id="speciesName">
-                            <li>Name</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.LocalizedCompound}}
-                            <li>{{this.$.Name}} </li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                        <ul class="content" id="speciesStructure">
-                            <li>Structure</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.LocalizedCompound}}
-                            <li>{{this.$.Structure}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-                <div class="monitor table long">
-                    <h4>Molecules</h4>
-                    <div class="clearfix">
-                        <ul class="content">
-                            <li>Name</li>
-                        </ul>
-                        <ul class="content">
-                            <li>Link</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="monitor table small">
-                    <h4>Publications</h4>
-                </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p>Annotaion</p>
-                    {{/each}}
-                </div>
-            </div>
-            <div id="observables" class="optionData">
-                <h2 class="header">Observables</h2>
-                <div class="monitor table large">
-                    <div class="clearfix">
-                        <ul class="content" id="structureName">
-                            <li>Name</li>
-                        </ul>
-                        <ul class="discussions" id="structureType">
-                            <li>Type</li>
-                        </ul>
-                        <ul class="discussions" id="structurePolarity">
-                            <li>BioNetGen Defination</li>
-                        </ul>
-                        <ul class="discussions" id="structurePolarity">
-                            <li>Count</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="monitor table small">
-                    <h4>Publications</h4>
-                </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p>Annotaion</p>
-                    {{/each}}
-                </div>
-            </div>
-            <div id="applications" class="optionData">
-                <h2 class="header">Applications</h2>
-                <div class="monitor table large">
-                    <div class="clearfix">
-                        <ul class="content">
-                            <li>Name</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.SimulationSpec as |value key|}}
-                            <li>{{value.$.Name}}</li>
-                            {{/each}}
-                            {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{!-- popup --}}
+                {{!-- popup reactions Expressions--}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.SimpleReaction as |value key|}}
+                {{#each value.Kinetics}}
+                <div class="popup box-{{value.$.Name}}-expression">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+                        {{!-- Expressions --}}
+                        <h2 id="reactionNameExp">Expressions</h2>
 
-                        </ul>
-                        <ul class="content">
-                            <li>Math Type</li>
-                        </ul>
 
-                        <ul class="content">
-                            <li>Annotation</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.SimulationSpec as |value key|}}
-                            <li>{{value.Annotation}}</li>
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {{#each data.vcml.BioModel}}
-            {{#each this.SimulationSpec as |value key|}}
-            <div id="specifications{{key}}" class="optionData">
-                <h2 class="header">Specifications - {{value.$.Name}}</h2>
-                <div class="monitor table large">
-                    <div class="clearfix">
-                        {{#each value.ReactionContext}}
+                        {{#each this.Parameter}}
 
-                        <ul class="content" id="specificationsSpecies">
-                            <li>Species</li>
-                            {{#each this.LocalizedCompoundSpec}}
-                            <li>{{this.$.LocalizedCompoundRef}}</li>
-                            {{/each}}
-                        </ul>
-                        <ul class="content" id="specificationsStructure">
-                            <li>Structure</li>
-                        </ul>
-                        <ul class="content" id="specificationsInitial">
-                            <li>Initial Condition</li>
-                            {{#each this.LocalizedCompoundSpec}}
-                            <li>{{this.InitialConcentration}}</li>
-                            {{/each}}
-                        </ul>
-                        <ul class="discussions" id="specificationsDiffusion">
-                            <li>Diffusion Constant</li>
-                            {{#each this.LocalizedCompoundSpec}}
-                            <li>{{this.Diffusion}}</li>
-                            {{/each}}
-                        </ul>
+                        <div class="role">
+                            <p class="role-title">{{this.$.Role}}</p>
+                            <p class="role-text">{{this._}} <span class="unit">[{{this.$.Unit}}]</span> </p>
+                        </div>
                         {{/each}}
                     </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
                 </div>
-                <div class="monitor table small">
-                    <h4>Publications</h4>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{!-- popup --}}
+            </div>
+
+            {{!-- Structures Table  --}}
+            <div id="structures" class="optionData">
+                <h2 class="header">Structures</h2>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Name">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Type">Type
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Type', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Type', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Electrical">Electrical
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Electrical', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Electrical', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data.vcml.BioModel}}
+                            {{#each this.Model}}
+                            {{#each this.Membrane}}
+                            <tr>
+                                <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+                                <td data-label="Type" class="Type">Membrane</td>
+                                <td data-label="Electrical" class="Electrical">
+                                    {{this.$.PositiveFeature}}(+) &nbsp; {{this.$.NegativeFeature}}(-)
+                                </td>
+                            </tr>
+
+                            {{/each}}
+                            {{#each this.Feature}}
+                            <tr>
+                                <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+                                <td data-label="Type" class="Type">Compartment</td>
+                                <td data-label="Electrical" class="Electrical">
+                                    {{this.$.PositiveFeature}}(+) &nbsp; {{this.$.NegativeFeature}}(-)
+                            </tr>
+                            {{/each}}
+                            {{/each}}
+                            {{/each}}
+
+
+                        </tbody>
+                    </table>
                 </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p>Annotaion</p>
-                    {{/each}}
+
+                {{!-- popup structures membrane--}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.Membrane as |value key|}}
+                <div class="popup box-{{value.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+
+                        {{!-- annotation --}}
+                        <h2>Text Annotations</h2>
+                        <p>Annotations will come here</p>
+
+                        {{!-- universal ID's  --}}
+                        <h2>Universal ID's</h2>
+                        <p>RFID | pubmed</p>
+
+                    </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                </div>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{!-- popup --}}
+
+                {{!-- popup structures features --}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.Feature as |value key|}}
+                <div class="popup box-{{value.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+
+                        {{!-- annotation --}}
+                        <h2>Text Annotations</h2>
+                        <p>Annotations will come here</p>
+
+                        {{!-- universal ID's  --}}
+                        <h2>Universal ID's</h2>
+                        <p>RFID | pubmed</p>
+
+
+                    </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                </div>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{!-- popup --}}
+            </div>
+
+            {{!-- Species table  --}}
+            <div id="species" class="optionData">
+                <h2 class="header">Species</h2>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Name">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Structure">Structure
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Structure', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Structure', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data.vcml.BioModel}}
+                            {{#each this.Model}}
+                            {{#each this.LocalizedCompound}}
+                            <tr>
+                                <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+                                <td data-label="Structure" class="Structure">{{this.$.Structure}}</td>
+                            </tr>
+                            {{/each}}
+                            {{/each}}
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{!-- popup Species --}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.LocalizedCompound as |value key|}}
+                <div class="popup box-{{value.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+
+                        {{!-- annotation --}}
+                        <h2>Text Annotations</h2>
+                        <p>Annotations will come here</p>
+
+                        {{!-- universal ID's  --}}
+                        <h2>Universal ID's</h2>
+                        <p>RFID | pubmed</p>
+
+                    </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                </div>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{!-- popup --}}
+            </div>
+
+            {{!-- Molecules table  --}}
+            <div id="molecules" class="optionData">
+                <h2 class="header">Molecules</h2>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Name">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Description">Description
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Description', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Description', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data.vcml.BioModel}}
+                            {{#each this.Model}}
+                            {{#each this.RbmModelContainer}}
+                            {{#each this.MolecularTypeList}}
+                            {{#each this.MolecularType}}
+
+                            <tr>
+                                <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+
+                                <td data-label="Description" class="Description">
+                                    {{#each this.MolecularComponent}}
+                                    {{this.$.Name}}
+                                    {{#if this.AllowableState}}
+                                    {{#each this.AllowableState}}
+                                    ~{{this.$.Name}}
+                                    {{/each}}
+                                    {{/if}}
+                                    .
+                                    {{/each}}
+                                </td>
+                            </tr>
+                            {{/each}}
+                            {{/each}}
+                            {{/each}}
+                            {{/each}}
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{!-- popup Molucules --}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.RbmModelContainer}}
+                {{#each this.MolecularTypeList}}
+                {{#each this.MolecularType as |value key|}}
+                <div class="popup box-{{value.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+
+                        {{!-- annotation --}}
+                        <h2>Text Annotations</h2>
+                        <p>Annotations will come here</p>
+
+                        {{!-- universal ID's  --}}
+                        <h2>Universal ID's</h2>
+                        <p>RFID | pubmed</p>
+
+                    </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                </div>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{!-- popup --}}
+            </div>
+
+            {{!-- Observables table  --}}
+            <div id="observables" class="optionData">
+                <h2 class="header">Observables</h2>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Name">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Type">Type
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Type', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Type', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="BioNetGen">BioNetGen Defination
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'BioNetGen', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'BioNetGen', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Count">Count
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Count', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Count', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td data-label="Name" class="Name">Name</td>
+                                <td data-label="Type" class="Type">Type</td>
+                                <td data-label="BioNetGen" class="BioNetGen">BioNetGen Defination</td>
+                                <td data-label="Count" class="Count">Count</td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
+            {{!-- Applications Table  --}}
+            <div id="applications" class="optionData">
+                <h2 class="header">Applications</h2>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Name">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Type">Math Type
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Type', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Type', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Annotation">Annotation
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Annotation', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Annotation', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {{#each data.vcml.BioModel}}
+                            {{#each this.SimulationSpec as |value key|}}
+                            <tr>
+                                <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+                                <td data-label="Type" class="Type"></td>
+                                <td data-label="Annotation" class="Annotation">{{value.Annotation}}</td>
+                            </tr>
+
+                            {{/each}}
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{!-- popup applications --}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.SimulationSpec as |value key|}}
+                <div class="popup box-{{value.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+
+                        {{!-- annotation --}}
+                        <h2>Text Annotations</h2>
+                        <p>Annotations will come here</p>
+
+                        {{!-- universal ID's  --}}
+                        <h2>Universal ID's</h2>
+                        <p>RFID | pubmed</p>
+
+                    </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                </div>
+                {{/each}}
+                {{/each}}
+
+                {{!-- popup --}}
+            </div>
+
+            {{!-- for each application  --}}
+            {{#each data.vcml.BioModel}}
+            {{#each this.SimulationSpec as |value key|}}
+
+            {{!-- specifications table  --}}
+            <div id="specifications{{key}}" class="optionData">
+                <h2 class="header">Specifications - {{value.$.Name}}</h2>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Species">Species
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Species', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Species', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Structure">Structure
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Structure', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Structure', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Initial">Initial Condition
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Initial', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Initial', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Diffusion">Diffusion Constant
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Diffusion', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Diffusion', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {{#each value.ReactionContext}}
+                            {{#each this.LocalizedCompoundSpec}}
+                            <tr>
+                                <td data-label="Species" class="Species"><a id={{this.$.LocalizedCompoundRef}}
+                                        onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.LocalizedCompoundRef}}<i
+                                            class="fa fa-info"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+                                <td data-label="Structure" class="Structure"></td>
+                                <td data-label="Initial" class="Initial">{{this.InitialConcentration}}</td>
+                                <td data-label="Diffusion" class="Diffusion">{{this.Diffusion}}</td>
+                            </tr>
+
+                            {{/each}}
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                {{!-- popup specifications   --}}
+                {{#each value.ReactionContext}}
+                {{#each this.LocalizedCompoundSpec}}
+                <div class="popup box-{{this.$.LocalizedCompoundRef}}">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{this.$.LocalizedCompoundRef}}</span></h3>
+
+                        {{!-- annotation --}}
+                        <h2>Text Annotations</h2>
+                        <p>Annotations will come here</p>
+
+                        {{!-- universal ID's  --}}
+                        <h2>Universal ID's</h2>
+                        <p>RFID | pubmed</p>
+
+                    </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                </div>
+                {{/each}}
+                {{/each}}
+                {{!-- popup specifications   --}}
+            </div>
+
+            {{!-- simulations table  --}}
             <div id="simulations{{key}}" class="optionData">
                 <h2 class="header">Simulations - {{value.$.Name}}</h2>
-                <div class="monitor table large">
-                    <div class="clearfix">
-                        <ul class="content" id="simulationsName">
-                            <li>Name</li>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Name">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="endTime">End Time
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'endTime', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'endTime', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Output">Output Options
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Output', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Output', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {{#each value.Simulation}}
-                            <li>{{ this.$.Name}}</li>
+                            <tr>
+                                <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
+                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
+                                            aria-hidden="true"></i></a></td>
+                                {{#each this.SolverTaskDescription}}
+                                {{#each this.TimeBound}}
+                                <td data-label="endTime" class="endTime">{{ this.$.EndTime}} <span
+                                        class="unit">[milisec]</span>
+                                </td>
+                                {{/each}}
+                                {{#each this.OutputOptions}}
+                                <td data-label="Output" class="Output">every {{ this.$.OutputTimeStep}} <span
+                                        class="unit">[milisec]</span></td>
+                                {{/each}}
+                                {{/each}}
+                            </tr>
                             {{/each}}
-                        </ul>
-                        <ul class="content" id="specificationsStructure">
-                            <li>End Time</li>
-                            {{#each value.Simulation}}
-                            {{#each this.SolverTaskDescription}}
-                            {{#each this.TimeBound}}
-                            <li>{{ this.$.EndTime}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                        <ul class="content" id="specificationsInitial">
-                            <li>Output Options</li>
-                            {{#each value.Simulation}}
-                            {{#each this.SolverTaskDescription}}
-                            {{#each this.OutputOptions}}
-                            <li>every {{ this.$.OutputTimeStep}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
+                        </tbody>
+                    </table>
+                </div>
+                {{!-- popup simulations   --}}
+                {{#each value.Simulation}}
+                <div class="popup box-{{this.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Element Name: <span>{{this.$.Name}}</span></h3>
+
+                        {{!-- annotation --}}
+                        <h2>Text Annotations</h2>
+                        <p>Annotations will come here</p>
+
+                        {{!-- universal ID's  --}}
+                        <h2>Universal ID's</h2>
+                        <p>RFID | pubmed</p>
+
                     </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
                 </div>
-                <div class="monitor table small">
-                    <h4>Publications</h4>
-                </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p>Annotaion</p>
-                    {{/each}}
-                </div>
+                {{/each}}
+                {{!-- popup simulations   --}}
             </div>
             {{/each}}
             {{/each}}
 
-            <div id="tools" class="optionData">
+
+
+            <div id="global" class="optionData">
                 <h2 class="header">Global Parameters</h2>
-                <div class="monitor table large">
-                    <div class="clearfix">
-                        <ul class="content" id="structureName">
-                            <li>Defined In</li>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Name globalParameterName">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="Expression">Expression
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Expression', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Expression', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {{#each data.vcml.BioModel}}
                             {{#each this.Model}}
                             {{#each this.ModelParameters}}
                             {{#each this.Parameter}}
-                            <li>Global</li>
+                            <tr>
+                                <td data-label="Name" class="Name">{{this.$.Name}}</td>
+                                <td data-label="Expression" class="Expression">{{this._}}<span
+                                        class="unit">[{{this.$.Unit}}]</span></td>
+                            </tr>
                             {{/each}}
                             {{/each}}
                             {{/each}}
                             {{/each}}
-                        </ul>
-                        <ul class="discussions" id="structureType">
-                            <li>Name</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.ModelParameters}}
-                            {{#each this.Parameter}}
-                            <li>{{this.$.Name}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                        <ul class="discussions" id="structurePolarity">
-                            <li>Description</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.ModelParameters}}
-                            {{#each this.Parameter}}
-                            <li>{{this.$.Role}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                        <ul class="discussions" id="structurePolarity">
-                            <li>Expression</li>
-                            {{#each data.vcml.BioModel}}
-                            {{#each this.Model}}
-                            {{#each this.ModelParameters}}
-                            {{#each this.Parameter}}
-                            <li>{{this._}}</li>
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                            {{/each}}
-                        </ul>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="monitor table small">
-                    <h4>Publications</h4>
-                </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p>Annotaion</p>
-                    {{/each}}
-                </div>
+
             </div>
 
         </div>
-        <ul class="statusbar">
-            <li><a href=""></a></li>
-            <li><a href=""></a></li>
-            <li class="profiles-setting"><a href="">s</a></li>
-            <li class="logout"><a href="">k</a></li>
-        </ul>
     </div>
 </div>
+
+
+
+<script>
+    // making the first popup visible 
+    var firstPopup = document.querySelector(".popup").firstChild;
+    firstPopup.parentElement.classList.add("firstPopup");
+
+
+    // Open popup
+    var open = 1;
+    function reply_click(clicked_id) {
+        if (open == 1) {
+            $(".popup").css("opacity", 0);
+            $(".overlay").css("opacity", 0);
+            $(".popup").css("display", "none");
+            $(".overlay").css("display", "none");
+        }
+        $(`.box-${clicked_id}`).css("opacity", 1);
+        $(".overlay").css("opacity", 0.8);
+        $(`.box-${clicked_id}`).css("display", "block");
+        $(".overlay").css("display", "block");
+        open = 1;
+    };
+    // close popup
+    $(".popup-close").click(function () {
+        open = 0;
+        $(".popup").css("opacity", 0);
+        $(".overlay").css("opacity", 0);
+        setTimeout(function () {
+            $(".popup").css("display", "none");
+            $(".overlay").css("display", "none");
+        }, 1000);
+    });
+
+</script>
