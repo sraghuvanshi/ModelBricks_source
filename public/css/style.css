@@ -515,6 +515,24 @@ a {
   padding: 0% 4%;
 }
 
+.optionData span.propertyBtn {
+  float: right;
+}
+
+.optionData span.propertyBtn a {
+  margin-left: 10px;
+  color: #333;
+  opacity: 0.4;
+  font-style: italic;
+  font-size: 0.7em;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+
+.optionData span.propertyBtn a:hover {
+  color: #3eb9fe;
+}
+
 .optionData > .reactionDiagram {
   border: 1px solid #ebebeb;
   border-bottom: 1px solid black;
@@ -2823,7 +2841,7 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
   overflow-y: auto;
 }
 
-.box-diagram .popup-text {
+.box-diagram .textWrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2831,11 +2849,13 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
 }
 
 .box-diagram .publications {
-  min-width: 50%;
+  width: 50%;
+  word-wrap: break-word;
 }
 
 .box-diagram .annotations {
-  min-width: 50%;
+  width: 50%;
+  word-wrap: break-word;
 }
 
 .box-diagram h2 {

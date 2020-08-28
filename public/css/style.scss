@@ -505,6 +505,21 @@ a {
 .optionData {
   width: 100%;
   padding: 0% 4%;
+  span.propertyBtn {
+    float: right;
+    // border: 2px solid green;
+    a {
+      margin-left: 10px;
+      color: #333;
+      opacity: 0.4;
+      font-style: italic;
+      font-size: 0.7em;
+      transition: 0.5s ease;
+    }
+    a:hover {
+      color: #3eb9fe;
+    }
+  }
 }
 .optionData > .reactionDiagram {
   border: 1px solid rgb(235, 235, 235);
@@ -2646,10 +2661,19 @@ li.card {
   display: block;
   opacity: 1;
 }
+// .uid {
+//   width: 50%;
+//   word-wrap: break-word;
+// }
+// .textAnnotation {
+//   width: 50%;
+//   word-wrap: break-word;
+// }
 .popup .popup-text {
   font-family: "Indie Flower", cursive;
   margin-top: 6%;
   color: rgb(90, 90, 90);
+  // display: flex;
 
   h3 {
     position: absolute;
@@ -2693,6 +2717,7 @@ li.card {
     }
   }
 }
+
 .box-diagram {
   // -webkit-box-shadow: 0px 7px 6px -6px rgba(0, 0, 0, 0.28);
   // -moz-box-shadow: 0px 7px 6px -6px rgba(0, 0, 0, 0.28);
@@ -2722,15 +2747,17 @@ li.card {
   transition: all 0.5s ease-in-out;
   opacity: 1;
   overflow-y: auto;
-  .popup-text {
+  .textWrap {
     display: flex;
     width: 100%;
   }
   .publications {
-    min-width: 50%;
+    width: 50%;
+    word-wrap: break-word;
   }
   .annotations {
-    min-width: 50%;
+    width: 50%;
+    word-wrap: break-word;
   }
   h2 {
     border: 1px solid rgb(199, 199, 199);

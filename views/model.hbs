@@ -106,10 +106,13 @@
                 {{!--info Reaction Diagram--}}
 
                 <div class="box-diagram">
-                    <div class='popup-text'>
-                        <div class="publications" id="globalPublications">
+                    <div class='textWrap'>
+                        <div class="publications" id="globalPublications" onclick="test(BioModel)">
+                            <h2>Publications</h2>
+
                         </div>
                         <div class="annotations" id="globalAnnotations">
+                            <h2>Annotations</h2>
                         </div>
                     </div>
                 </div>
@@ -186,7 +189,7 @@
                                             aria-hidden="true"></i></a></td>
                                 <td data-label="Structure" class="Structure">{{value.$.Structure}}</td>
                                 {{#each value.Kinetics}}
-                                <td data-label="Kinetics" class="Kinetics"><a id="{{value.$.Name}}-expression"
+                                <td data-label="Kinetics" class="Kinetics"><a id="{{key}}"
                                         onClick="reply_click(this.id)"
                                         style="cursor:pointer; color:#3EB9FE">{{this.$.KineticsType}}<i
                                             class="fa fa-superscript"
@@ -209,13 +212,18 @@
                     <div class='popup-text'>
                         <h3>Element Name: <span>{{value.$.Name}}</span></h3>
 
-                        {{!-- annotation --}}
-                        <h2>Text Annotations</h2>
-                        <p>Annotations will come here</p>
 
                         {{!-- universal ID's  --}}
-                        <h2>Universal ID's</h2>
-                        <p>RFID | pubmed</p>
+                        <div class="uid">
+                            <h2>Universal ID's</h2>
+                            <p>RFID | pubmed</p>
+                        </div>
+                        {{!-- annotation --}}
+                        <div class="textAnnotation">
+                            <h2>Text Annotations</h2>
+                            <p>Annotations will come here</p>
+                        </div>
+
 
                     </div>
                     <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
@@ -229,8 +237,8 @@
                 {{#each this.Model}}
                 {{#each this.SimpleReaction as |value key|}}
                 {{#each value.Kinetics}}
-                <div class="popup box-{{value.$.Name}}-expression">
-                    <div class='popup-text'>
+                <div class="popup box-{{key}}">
+                    <div class='popup-text block'>
                         <h3>Element Name: <span>{{value.$.Name}}</span></h3>
                         {{!-- Expressions --}}
                         <h2 id="reactionNameExp">Expressions</h2>
@@ -623,6 +631,8 @@
                                                     class="fa fa-chevron-up"></i></button></a>
                                     </div>
                                 </th>
+                                <th class="properties">Properties
+                                </th>
                                 <th class="Type">Math Type
                                     <div class="sort-table-arrows">
                                         <a href="javascript:sort(true, 'Type', 'content-table3');"><button
@@ -654,6 +664,11 @@
                                         style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
                                             style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
                                             aria-hidden="true"></i></a></td>
+                                <td data-label="Name" class="Name">
+                                    <a href="#specifications{{key}}"
+                                        style="cursor:pointer; color:#3EB9FE">Specifications</a>
+                                    <a href="#simulations{{key}}" style="cursor:pointer; color:#3EB9FE">Simulations</a>
+                                </td>
                                 <td data-label="Type" class="Type"></td>
                                 <td data-label="Annotation" class="Annotation">{{value.Annotation}}</td>
                             </tr>
@@ -693,7 +708,9 @@
 
             {{!-- specifications table  --}}
             <div id="specifications{{key}}" class="optionData">
-                <h2 class="header">Specifications - {{value.$.Name}}</h2>
+                <h2 class="header">Specifications - {{value.$.Name}} <span class="propertyBtn"><a
+                            href="#simulations{{key}}">go to
+                            Simulations</a></span> </h2>
                 <div class="modelTable">
                     <table id="content-table3" class="table-responsive-full sort-table">
                         <thead>
@@ -708,16 +725,7 @@
                                                     class="fa fa-chevron-up"></i></button></a>
                                     </div>
                                 </th>
-                                <th class="Structure">Structure
-                                    <div class="sort-table-arrows">
-                                        <a href="javascript:sort(true, 'Structure', 'content-table3');"><button
-                                                class="button" title="down arrow"><i
-                                                    class="fa fa-chevron-down"></i></button></a>
-                                        <a href="javascript:sort(false, 'Structure', 'content-table3');"><button
-                                                class="button" title="up arrow"><i
-                                                    class="fa fa-chevron-up"></i></button></a>
-                                    </div>
-                                </th>
+
                                 <th class="Initial">Initial Condition
                                     <div class="sort-table-arrows">
                                         <a href="javascript:sort(true, 'Initial', 'content-table3');"><button
@@ -751,7 +759,6 @@
                                             class="fa fa-info"
                                             style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
                                             aria-hidden="true"></i></a></td>
-                                <td data-label="Structure" class="Structure"></td>
                                 <td data-label="Initial" class="Initial">{{this.InitialConcentration}}</td>
                                 <td data-label="Diffusion" class="Diffusion">{{this.Diffusion}}</td>
                             </tr>
@@ -786,7 +793,9 @@
 
             {{!-- simulations table  --}}
             <div id="simulations{{key}}" class="optionData">
-                <h2 class="header">Simulations - {{value.$.Name}}</h2>
+                <h2 class="header">Simulations - {{value.$.Name}} <span class="propertyBtn"><a
+                            href="#specifications{{key}}">go to
+                            Specifications</a></span></h2>
                 <div class="modelTable">
                     <table id="content-table3" class="table-responsive-full sort-table">
                         <thead>
@@ -832,13 +841,11 @@
                                             aria-hidden="true"></i></a></td>
                                 {{#each this.SolverTaskDescription}}
                                 {{#each this.TimeBound}}
-                                <td data-label="endTime" class="endTime">{{ this.$.EndTime}} <span
-                                        class="unit">[milisec]</span>
+                                <td data-label="endTime" class="endTime">{{ this.$.EndTime}}
                                 </td>
                                 {{/each}}
                                 {{#each this.OutputOptions}}
-                                <td data-label="Output" class="Output">every {{ this.$.OutputTimeStep}} <span
-                                        class="unit">[milisec]</span></td>
+                                <td data-label="Output" class="Output">every {{ this.$.OutputTimeStep}}</td>
                                 {{/each}}
                                 {{/each}}
                             </tr>
@@ -868,8 +875,6 @@
             </div>
             {{/each}}
             {{/each}}
-
-
 
             <div id="global" class="optionData">
                 <h2 class="header">Global Parameters</h2>

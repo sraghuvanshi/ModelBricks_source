@@ -105,7 +105,7 @@ app.get("/json", (req, res) => {
 app.get("/ajson", (req, res) => {
   var parser = new xml2js.Parser();
   fs.readFile(
-    "./annotations/CM_PM12648679_MB5__Activator_inhibitor_annotations.xml",
+    "./annotations/CM_PM18628746_MB1__Rab5_switch_annotations.xml",
     (err, data) => {
       parser.parseString(data, (err, result) => {
         res.send(result);
