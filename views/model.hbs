@@ -64,7 +64,8 @@
         <ul class="topbar clearfix">
             {{#each data.vcml.BioModel}}
             {{#each this.Version}}
-            <li><a id="modelName" href="#dashboard">{{trimString this.$.Name}} - {{this.$.KeyValue}}</a></li>
+            <li><a id="modelName" href="#dashboard">{{trimString this.$.Name}} -
+                    {{this.$.KeyValue}}</a></li>
             <li class="printable"><a href="/curatedList/printModel/{{this.$.KeyValue}}"><i class="fa fa-print"
                         aria-hidden="true"></i></a>
             </li>
@@ -86,29 +87,19 @@
                 <div class="reactionDiagram" id="diagram">
                     {{#each data.vcml.BioModel}}
                     {{#each this.Version}}
-                    <img class="image-zoom-available"
-                        src="https://vcellapi-beta.cam.uchc.edu:8080/biomodel/{{this.$.KeyValue}}/diagram"
+                    <img src="https://vcellapi-beta.cam.uchc.edu:8080/biomodel/{{this.$.KeyValue}}/diagram"
                         alt="reactionDiagram" draggable="false" />
                     {{/each}}
                     {{/each}}
 
                 </div>
-                {{!-- <div class="monitor table small">
-                    <h4>Publications</h4>
-                </div>
-                <div class="monitor table small">
-                    <h4>Annotation</h4>
-                    {{#each data.vcml.BioModel}}
-                    <p id="annotation">{{this.Annotation}}</p>
-                    {{/each}}
-                </div> --}}
 
                 {{!--info Reaction Diagram--}}
 
                 <div class="box-diagram">
                     <div class='textWrap'>
                         <div class="publications" id="globalPublications" onclick="test(BioModel)">
-                            <h2>Publications</h2>
+                            <h2>Cross-References</h2>
 
                         </div>
                         <div class="annotations" id="globalAnnotations">
@@ -184,17 +175,12 @@
                                     {{/each}}
                                 </td>
                                 <td data-label="Name" class="Name"><a id={{value.$.Name}} onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{value.$.Name}}<i class="fa fa-info"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                        style="cursor:pointer; color:#3EB9FE">{{value.$.Name}}</a></td>
                                 <td data-label="Structure" class="Structure">{{value.$.Structure}}</td>
                                 {{#each value.Kinetics}}
                                 <td data-label="Kinetics" class="Kinetics"><a id="{{key}}"
                                         onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{this.$.KineticsType}}<i
-                                            class="fa fa-superscript"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.KineticsType}}</a></td>
                                 {{/each}}</td>
                             </tr>
 
@@ -214,14 +200,12 @@
 
 
                         {{!-- universal ID's  --}}
-                        <div class="uid">
+                        <div class="uid" id="reactionUID-{{value.$.Name}}">
                             <h2>Universal ID's</h2>
-                            <p>RFID | pubmed</p>
                         </div>
                         {{!-- annotation --}}
-                        <div class="textAnnotation">
+                        <div class="textAnnotation" id="reactionTA-{{value.$.Name}}">
                             <h2>Text Annotations</h2>
-                            <p>Annotations will come here</p>
                         </div>
 
 
@@ -306,9 +290,7 @@
                             {{#each this.Membrane}}
                             <tr>
                                 <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
                                 <td data-label="Type" class="Type">Membrane</td>
                                 <td data-label="Electrical" class="Electrical">
                                     {{this.$.PositiveFeature}}(+) &nbsp; {{this.$.NegativeFeature}}(-)
@@ -319,9 +301,7 @@
                             {{#each this.Feature}}
                             <tr>
                                 <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
                                 <td data-label="Type" class="Type">Compartment</td>
                                 <td data-label="Electrical" class="Electrical">
                                     {{this.$.PositiveFeature}}(+) &nbsp; {{this.$.NegativeFeature}}(-)
@@ -343,13 +323,14 @@
                     <div class='popup-text'>
                         <h3>Element Name: <span>{{value.$.Name}}</span></h3>
 
-                        {{!-- annotation --}}
-                        <h2>Text Annotations</h2>
-                        <p>Annotations will come here</p>
-
                         {{!-- universal ID's  --}}
-                        <h2>Universal ID's</h2>
-                        <p>RFID | pubmed</p>
+                        <div class="uid" id="structureUID-{{value.$.Name}}">
+                            <h2>Universal ID's</h2>
+                        </div>
+                        {{!-- annotation --}}
+                        <div class="textAnnotation" id="structureTATA-{{value.$.Name}}">
+                            <h2>Text Annotations</h2>
+                        </div>
 
                     </div>
                     <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
@@ -367,13 +348,14 @@
                     <div class='popup-text'>
                         <h3>Element Name: <span>{{value.$.Name}}</span></h3>
 
-                        {{!-- annotation --}}
-                        <h2>Text Annotations</h2>
-                        <p>Annotations will come here</p>
-
                         {{!-- universal ID's  --}}
-                        <h2>Universal ID's</h2>
-                        <p>RFID | pubmed</p>
+                        <div class="uid" id="structureUID-{{value.$.Name}}">
+                            <h2>Universal ID's</h2>
+                        </div>
+                        {{!-- annotation --}}
+                        <div class="textAnnotation" id="structureTATA-{{value.$.Name}}">
+                            <h2>Text Annotations</h2>
+                        </div>
 
 
                     </div>
@@ -421,9 +403,7 @@
                             {{#each this.LocalizedCompound}}
                             <tr>
                                 <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
                                 <td data-label="Structure" class="Structure">{{this.$.Structure}}</td>
                             </tr>
                             {{/each}}
@@ -440,13 +420,14 @@
                     <div class='popup-text'>
                         <h3>Element Name: <span>{{value.$.Name}}</span></h3>
 
-                        {{!-- annotation --}}
-                        <h2>Text Annotations</h2>
-                        <p>Annotations will come here</p>
-
                         {{!-- universal ID's  --}}
-                        <h2>Universal ID's</h2>
-                        <p>RFID | pubmed</p>
+                        <div class="uid" id="speciesUID-{{value.$.Name}}">
+                            <h2>Universal ID's</h2>
+                        </div>
+                        {{!-- annotation --}}
+                        <div class="textAnnotation" id="speciesTA-{{value.$.Name}}">
+                            <h2>Text Annotations</h2>
+                        </div>
 
                     </div>
                     <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
@@ -496,20 +477,18 @@
 
                             <tr>
                                 <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
 
                                 <td data-label="Description" class="Description">
-                                    {{#each this.MolecularComponent}}
+                                    {{this.$.Name}}
+                                    ({{#each this.MolecularComponent}}
                                     {{this.$.Name}}
                                     {{#if this.AllowableState}}
                                     {{#each this.AllowableState}}
                                     ~{{this.$.Name}}
                                     {{/each}}
                                     {{/if}}
-                                    .
-                                    {{/each}}
+                                    {{/each}})
                                 </td>
                             </tr>
                             {{/each}}
@@ -530,13 +509,14 @@
                     <div class='popup-text'>
                         <h3>Element Name: <span>{{value.$.Name}}</span></h3>
 
-                        {{!-- annotation --}}
-                        <h2>Text Annotations</h2>
-                        <p>Annotations will come here</p>
-
                         {{!-- universal ID's  --}}
-                        <h2>Universal ID's</h2>
-                        <p>RFID | pubmed</p>
+                        <div class="uid" id="moleculesUID-{{value.$.Name}}">
+                            <h2>Universal ID's</h2>
+                        </div>
+                        {{!-- annotation --}}
+                        <div class="textAnnotation" id="moleculeTA-{{value.$.Name}}">
+                            <h2>Text Annotations</h2>
+                        </div>
 
                     </div>
                     <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
@@ -661,9 +641,7 @@
                             {{#each this.SimulationSpec as |value key|}}
                             <tr>
                                 <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
                                 <td data-label="Name" class="Name">
                                     <a href="#specifications{{key}}"
                                         style="cursor:pointer; color:#3EB9FE">Specifications</a>
@@ -836,9 +814,7 @@
                             {{#each value.Simulation}}
                             <tr>
                                 <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}<i class="fa fa-info"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
                                 {{#each this.SolverTaskDescription}}
                                 {{#each this.TimeBound}}
                                 <td data-label="endTime" class="endTime">{{ this.$.EndTime}}
@@ -962,4 +938,13 @@
         }, 1000);
     });
 
+</script>
+
+<script src="/js/json.js"></script>
+
+<script>
+    alerting = (variable) => {
+        console.log("alert is on");
+        console.log(variable);
+    }
 </script>

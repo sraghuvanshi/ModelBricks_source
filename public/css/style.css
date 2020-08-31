@@ -342,7 +342,6 @@ a {
 
 .slidebar li:before {
   content: "";
-  font-family: "icomoon";
   speak: none;
   font-weight: normal;
   font-variant: normal;
@@ -456,7 +455,6 @@ a {
 }
 
 .mainContent h2:before {
-  font-family: "icomoon";
   content: attr(data-icon);
   font-weight: normal;
   font-variant: normal;
@@ -464,50 +462,6 @@ a {
   line-height: 1;
   margin-right: 10px;
   -webkit-font-smoothing: antialiased;
-}
-
-.mainContent div:nth-child(1) h2:before {
-  content: "\63";
-}
-
-.mainContent div:nth-child(2) h2:before {
-  content: "\64";
-}
-
-.mainContent div:nth-child(3) h2:before {
-  content: "\62";
-}
-
-.mainContent div:nth-child(4) h2:before {
-  content: "\65";
-}
-
-.mainContent div:nth-child(5) h2:before {
-  content: "\74";
-}
-
-.mainContent div:nth-child(6) h2:before {
-  content: "\66";
-}
-
-.mainContent div:nth-child(7) h2:before {
-  content: "\67";
-}
-
-.mainContent div:nth-child(8) h2:before {
-  content: "\68";
-}
-
-.mainContent div:nth-child(9) h2:before {
-  content: "\69";
-}
-
-.mainContent div:nth-child(10) h2:before {
-  content: "\6a";
-}
-
-.mainContent div:nth-child(11) h2:before {
-  content: "\75";
 }
 
 .optionData {
@@ -544,15 +498,6 @@ a {
 .optionData > .reactionDiagram img {
   width: 100%;
   height: 100%;
-}
-
-.optionData > .reactionDiagram .image-zoom-available {
-  cursor: -webkit-zoom-in;
-  cursor: zoom-in;
-}
-
-.optionData > .reactionDiagram .image-zoom-available.is-active {
-  cursor: none;
 }
 
 .optionData > .table {
@@ -696,7 +641,6 @@ a {
 
 .quick-press .save,
 .quick-press .delet {
-  font-family: "icomoon";
   width: 37px;
   background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f0), to(#e8e8e8));
   background: linear-gradient(top, #f6f6f0, #e8e8e8);
@@ -796,7 +740,6 @@ a {
 
 .statusbar .profiles-setting a,
 .statusbar .logout a {
-  font-family: "icomoon";
   width: 49px;
   height: 49px;
   line-height: 50px;
@@ -2755,7 +2698,6 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
   height: 30vh;
   z-index: 20010;
   overflow: auto;
-  border: 1px solid #2f86a7;
   /* color: red; */
   /* Animation */
   -webkit-transition: all 0.5s ease-in-out;
@@ -2769,10 +2711,23 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
   opacity: 1;
 }
 
+.uid {
+  width: 50%;
+  word-wrap: break-word;
+}
+
+.textAnnotation {
+  width: 50%;
+  word-wrap: break-word;
+}
+
 .popup .popup-text {
   font-family: "Indie Flower", cursive;
   margin-top: 6%;
   color: #5a5a5a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .popup .popup-text h3 {
@@ -2795,7 +2750,6 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
 }
 
 .popup .popup-text p {
-  border: 0.5px solid #c7c7c7;
   width: 100%;
   padding: 15px;
 }
@@ -2807,7 +2761,6 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
 }
 
 .popup .popup-text .role p {
-  border: 0.5px solid #c7c7c7;
   width: 50%;
   padding: 15px;
 }
@@ -2820,6 +2773,10 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
 
 .popup .popup-text .role .role-text {
   width: 75%;
+}
+
+.popup .block {
+  display: block;
 }
 
 .box-diagram {
@@ -2869,9 +2826,8 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
 }
 
 .box-diagram p {
-  border: 0.5px solid #c7c7c7;
   width: 100%;
-  padding: 15px;
+  padding: 5px;
 }
 
 /* Close button */
