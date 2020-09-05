@@ -119,7 +119,7 @@ app.get("/curatedList/search", async (req, res) => {
   const api_url =
     "https://vcellapi-beta.cam.uchc.edu:8080/biomodel?bmName=" +
     bmName +
-    "&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&startRow=1&maxRows=10&orderBy=date_desc";
+    "&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&startRow=1&maxRows=1000&orderBy=date_desc";
 
   const fetch_response = await fetch(api_url);
   const json = await fetch_response.json();
