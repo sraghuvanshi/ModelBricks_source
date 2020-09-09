@@ -66,7 +66,7 @@ app.set("view engine", "hbs");
 // for viewing model json file in browser
 app.get("/json", (req, res) => {
   var parser = new xml2js.Parser();
-  fs.readFile("./biomodels/Biomodel_176189227.vcml", (err, data) => {
+  fs.readFile("./biomodels/Biomodel_176191843.vcml", (err, data) => {
     parser.parseString(data, (err, result) => {
       res.send(result);
     });
@@ -76,7 +76,7 @@ app.get("/json", (req, res) => {
 app.get("/ajson", (req, res) => {
   var parser = new xml2js.Parser();
   fs.readFile(
-    "./annotations/CM_PM18628746_MB1__Rab5_switch_annotations.xml",
+    "./annotations/CM_PM25628036_MB4::Rho_GDI_binding_annoations.xml",
     (err, data) => {
       parser.parseString(data, (err, result) => {
         res.send(result);
@@ -131,7 +131,7 @@ app.get("/curatedList/search", async (req, res) => {
 });
 
 // main Dashboard for dynamic models selected from curated list page
-app.get("/curatedList/model/:id", (req, res) => {
+app.get("/curatedList/model/:id/:name", (req, res) => {
   // var info = "null";
   var parser = new xml2js.Parser();
   fs.readFile(
@@ -148,7 +148,7 @@ app.get("/curatedList/model/:id", (req, res) => {
   );
   var parser = new xml2js.Parser();
   fs.readFile(
-    "./annotations/CM_PM12648679_MB5__Activator_inhibitor_annotations.xml",
+    "./annotations/" + req.params.name + "_annotations.xml",
     (err, data) => {
       parser.parseString(data, (err, result) => {
         info = result;
@@ -160,7 +160,7 @@ app.get("/curatedList/model/:id", (req, res) => {
 });
 
 // dynamic printable pages, option available on dashboard page
-app.get("/curatedList/printModel/:id", (req, res) => {
+app.get("/curatedList/printModel/:id/:name", (req, res) => {
   var parser = new xml2js.Parser();
   fs.readFile(
     "./biomodels/Biomodel_" + req.params.id + ".vcml",
@@ -181,6 +181,20 @@ app.get("/curatedList/printModel/:id", (req, res) => {
           title: "ModelBricks - Model Print Page",
           data,
         });
+      });
+    }
+  );
+  var parser = new xml2js.Parser();
+  fs.readFile(
+    "./annotations/" + req.params.name + "_annotations.xml",
+    (err, data) => {
+      parser.parseString(data, (err, result) => {
+        info = result;
+        let jsonData = JSON.stringify(info);
+        fs.writeFileSync(
+          "./public/json/" + req.params.name + ".json",
+          jsonData
+        );
       });
     }
   );

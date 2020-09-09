@@ -12,111 +12,112 @@ fetch("/json/annotations.json")
 
       // global publications
       let globalPublications = document.getElementById("globalPublications");
-
       if (name.includes("BioModel")) {
-        // chebi
-        if (link.includes("chebi")) {
-          if (link.includes("%")) {
-            var indexToSlice = link.indexOf("%") + 1;
-            var length = link.length;
-            var linkId = link.slice(indexToSlice, length);
-            globalPublications.innerHTML += `
+        if (globalPublications != null) {
+          // chebi
+          if (link.includes("chebi")) {
+            if (link.includes("%")) {
+              var indexToSlice = link.indexOf("%") + 1;
+              var length = link.length;
+              var linkId = link.slice(indexToSlice, length);
+              globalPublications.innerHTML += `
           <p> <a href="${link}">Chebi : ${linkId}</a>
           </p>
           `;
-          } else {
-            var indexToSlice = link.lastIndexOf(":") + 1;
-            var length = link.length;
-            var linkId = link.slice(indexToSlice, length);
-            globalPublications.innerHTML += `
+            } else {
+              var indexToSlice = link.lastIndexOf(":") + 1;
+              var length = link.length;
+              var linkId = link.slice(indexToSlice, length);
+              globalPublications.innerHTML += `
           <p> <a href="${link}">Chebi : ${linkId}</a>
           </p>
 
           `;
+            }
           }
-        }
-        //mamo
-        if (link.includes("mamo")) {
-          var indexToSlice = link.lastIndexOf("_") + 1;
-          var length = link.length;
-          var linkId = link.slice(indexToSlice, length);
-          globalPublications.innerHTML += `
+          //mamo
+          if (link.includes("mamo")) {
+            var indexToSlice = link.lastIndexOf("_") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            globalPublications.innerHTML += `
           <p> <a href="${link}">Mamo : ${linkId}</a>
           </p>
           `;
-        }
-        //biomodels.db
-        if (link.includes("biomodels")) {
-          var indexToSlice = link.lastIndexOf("/") + 1;
-          var length = link.length;
-          var linkId = link.slice(indexToSlice, length);
-          globalPublications.innerHTML += `
+          }
+          //biomodels.db
+          if (link.includes("biomodels")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            globalPublications.innerHTML += `
           <p> <a href="${link}">BioModels : ${linkId}</a>
           </p>
           `;
-        }
-        //taxonomy
-        if (link.includes("taxonomy")) {
-          var indexToSlice = link.lastIndexOf("/") + 1;
-          var length = link.length;
-          var linkId = link.slice(indexToSlice, length);
-          globalPublications.innerHTML += `
+          }
+          //taxonomy
+          if (link.includes("taxonomy")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            globalPublications.innerHTML += `
             <p> <a href="${link}">Taxonomy : ${linkId}</a>
 
             </p>
             `;
-        }
-        //pubmed
-        if (link.includes("pubmed")) {
-          var indexToSlice = link.lastIndexOf("/") + 1;
-          var length = link.length;
-          var linkId = link.slice(indexToSlice, length);
-          globalPublications.innerHTML += `
+          }
+          //pubmed
+          if (link.includes("pubmed")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            globalPublications.innerHTML += `
             <p> <a href="${link}">Pubmed : ${linkId}</a>
 
             </p>
             `;
-        }
-        //uniprot
-        if (link.includes("uniprot")) {
-          var indexToSlice = link.length - 6;
-          var length = link.length;
-          var linkId = link.slice(indexToSlice, length);
-          globalPublications.innerHTML += `
+          }
+          //uniprot
+          if (link.includes("uniprot")) {
+            var indexToSlice = link.length - 6;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            globalPublications.innerHTML += `
             <p> <a href="${link}">Uniprot : ${linkId}</a>
 
             </p>
             `;
-        }
-        //Go
-        if (link.includes("go")) {
-          var indexToSlice = link.lastIndexOf(":") + 1;
-          var length = link.length;
-          var linkId = link.slice(indexToSlice, length);
-          globalPublications.innerHTML += `
+          }
+          //Go
+          if (link.includes("go")) {
+            var indexToSlice = link.lastIndexOf(":") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            globalPublications.innerHTML += `
             <p> <a href="${link}">Go : ${linkId}</a>
 
             </p>
             `;
-        }
-        //Reactome
-        if (link.includes("reactome")) {
-          var indexToSlice = link.lastIndexOf(":") + 1;
-          var length = link.length;
-          var linkId = link.slice(indexToSlice, length);
-          globalPublications.innerHTML += `
+          }
+          //Reactome
+          if (link.includes("reactome")) {
+            var indexToSlice = link.lastIndexOf(":") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            globalPublications.innerHTML += `
             <p> <a href="${link}">Reactome : ${linkId}</a>
 
             </p>
             `;
-        }
-        //DOI
-        if (link.includes("doi")) {
-          globalPublications.innerHTML += `
+          }
+          //DOI
+          if (link.includes("doi")) {
+            globalPublications.innerHTML += `
             <p> <a href="${link}">DOI</a>
 
             </p>
             `;
+          }
         }
       }
 
@@ -595,6 +596,244 @@ fetch("/json/annotations.json")
           }
         }
       }
+
+      // getting Observables UID's
+
+      if (name.includes("RbmObservable")) {
+        var indexToSlice = name.indexOf("(") + 1;
+        var length = name.indexOf(")");
+        var elementName = name.slice(indexToSlice, length);
+        console.log("Observale:" + elementName);
+
+        let annotationDiv = document.getElementById(
+          `observableUID-${elementName}`
+        );
+        if (annotationDiv != null) {
+          // chebi
+          if (link.includes("chebi")) {
+            if (link.includes("%")) {
+              var indexToSlice = link.indexOf("%") + 1;
+              var length = link.length;
+              var linkId = link.slice(indexToSlice, length);
+              annotationDiv.innerHTML += `
+          <p> <a href="${link}">Chebi : ${linkId}</a>
+          </p>
+          `;
+            } else {
+              var indexToSlice = link.lastIndexOf(":") + 1;
+              var length = link.length;
+              var linkId = link.slice(indexToSlice, length);
+              annotationDiv.innerHTML += `
+          <p> <a href="${link}">Chebi : ${linkId}</a>
+          </p>
+
+          `;
+            }
+          }
+          //mamo
+          if (link.includes("mamo")) {
+            var indexToSlice = link.lastIndexOf("_") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+          <p> <a href="${link}">Mamo : ${linkId}</a>
+          </p>
+          `;
+          }
+          //biomodels.db
+          if (link.includes("biomodels")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+          <p> <a href="${link}">BioModels : ${linkId}</a>
+          </p>
+          `;
+          }
+          //taxonomy
+          if (link.includes("taxonomy")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Taxonomy : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //pubmed
+          if (link.includes("pubmed")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Pubmed : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //uniprot
+          if (link.includes("uniprot")) {
+            var indexToSlice = link.length - 6;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Uniprot : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //Go
+          if (link.includes("go")) {
+            var indexToSlice = link.lastIndexOf(":") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Go : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //Reactome
+          if (link.includes("reactome")) {
+            var indexToSlice = link.lastIndexOf(":") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Reactome : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //DOI
+          if (link.includes("doi")) {
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">DOI</a>
+
+            </p>
+            `;
+          }
+        }
+      }
+
+      // getting Parameters UID's
+
+      if (name.includes("ModelParameter")) {
+        var indexToSlice = name.indexOf("(") + 1;
+        var length = name.indexOf(")");
+        var elementName = name.slice(indexToSlice, length);
+        console.log("Parameter:" + elementName);
+
+        let annotationDiv = document.getElementById(
+          `parameterUID-${elementName}`
+        );
+        if (annotationDiv != null) {
+          // chebi
+          if (link.includes("chebi")) {
+            if (link.includes("%")) {
+              var indexToSlice = link.indexOf("%") + 1;
+              var length = link.length;
+              var linkId = link.slice(indexToSlice, length);
+              annotationDiv.innerHTML += `
+          <p> <a href="${link}">Chebi : ${linkId}</a>
+          </p>
+          `;
+            } else {
+              var indexToSlice = link.lastIndexOf(":") + 1;
+              var length = link.length;
+              var linkId = link.slice(indexToSlice, length);
+              annotationDiv.innerHTML += `
+          <p> <a href="${link}">Chebi : ${linkId}</a>
+          </p>
+
+          `;
+            }
+          }
+          //mamo
+          if (link.includes("mamo")) {
+            var indexToSlice = link.lastIndexOf("_") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+          <p> <a href="${link}">Mamo : ${linkId}</a>
+          </p>
+          `;
+          }
+          //biomodels.db
+          if (link.includes("biomodels")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+          <p> <a href="${link}">BioModels : ${linkId}</a>
+          </p>
+          `;
+          }
+          //taxonomy
+          if (link.includes("taxonomy")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Taxonomy : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //pubmed
+          if (link.includes("pubmed")) {
+            var indexToSlice = link.lastIndexOf("/") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Pubmed : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //uniprot
+          if (link.includes("uniprot")) {
+            var indexToSlice = link.length - 6;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Uniprot : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //Go
+          if (link.includes("go")) {
+            var indexToSlice = link.lastIndexOf(":") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Go : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //Reactome
+          if (link.includes("reactome")) {
+            var indexToSlice = link.lastIndexOf(":") + 1;
+            var length = link.length;
+            var linkId = link.slice(indexToSlice, length);
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">Reactome : ${linkId}</a>
+
+            </p>
+            `;
+          }
+          //DOI
+          if (link.includes("doi")) {
+            annotationDiv.innerHTML += `
+            <p> <a href="${link}">DOI</a>
+
+            </p>
+            `;
+          }
+        }
+      }
     }
 
     // UID COMPLETED ---------------------->
@@ -608,9 +847,11 @@ fetch("/json/annotations.json")
       // global annotations
       let globalAnnotations = document.getElementById("globalAnnotations");
       if (name.includes("BioModel")) {
-        globalAnnotations.innerHTML += `
+        if (globalAnnotations != null) {
+          globalAnnotations.innerHTML += `
             <p>${text}</p>
             `;
+        }
       }
 
       // for Reactions
@@ -622,9 +863,11 @@ fetch("/json/annotations.json")
         let annotationDiv = document.getElementById(
           `reactionTA-${elementName}`
         );
-        annotationDiv.innerHTML += `
+        if (annotationDiv != null) {
+          annotationDiv.innerHTML += `
         <p>${text}</p>
         `;
+        }
       }
 
       // for Structures
@@ -636,9 +879,11 @@ fetch("/json/annotations.json")
         let annotationDiv = document.getElementById(
           `structureTA-${elementName}`
         );
-        annotationDiv.innerHTML += `
+        if (annotationDiv != null) {
+          annotationDiv.innerHTML += `
         <p>${text}</p>
         `;
+        }
       }
 
       // for Molecules
@@ -650,9 +895,11 @@ fetch("/json/annotations.json")
         let annotationDiv = document.getElementById(
           `moleculeTA-${elementName}`
         );
-        annotationDiv.innerHTML += `
+        if (annotationDiv != null) {
+          annotationDiv.innerHTML += `
         <p>${text}</p>
         `;
+        }
       }
 
       // for species
@@ -662,9 +909,48 @@ fetch("/json/annotations.json")
         var elementName = name.slice(indexToSlice, length);
 
         let annotationDiv = document.getElementById(`speciesTA-${elementName}`);
-        annotationDiv.innerHTML += `
+        if (annotationDiv != null) {
+          annotationDiv.innerHTML += `
         <p>${text}</p>
         `;
+        }
+      }
+
+      // for observables
+      if (name.includes("RbmObservable")) {
+        var indexToSlice = name.indexOf("(") + 1;
+        var length = name.indexOf(")");
+        var elementName = name.slice(indexToSlice, length);
+
+        let annotationDiv = document.getElementById(
+          `observableTA-${elementName}`
+        );
+        if (annotationDiv != null) {
+          annotationDiv.innerHTML += `
+        <p>${text}</p>
+        `;
+        }
+      }
+
+      // for Parameters
+      if (name.includes("ModelParameter")) {
+        var indexToSlice = name.indexOf("(") + 1;
+        var length = name.indexOf(")");
+        var elementName = name.slice(indexToSlice, length);
+
+        let annotationDiv = document.getElementById(
+          `parameterTA-${elementName}`
+        );
+        if (annotationDiv != null) {
+          annotationDiv.innerHTML += `
+        <p>${text}</p>
+        `;
+        }
       }
     }
   });
+
+// downloads section
+// console.log(selectedModel.innerHTML);
+// var selectedModelName = selectedModel.innerHTML;
+// console.log(selectedModel);

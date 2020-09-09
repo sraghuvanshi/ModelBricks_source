@@ -2485,7 +2485,7 @@ li.card {
 
         &:nth-of-type(even) {
           @media (min-width: $bp-bart) {
-            background-color: rgba(94, 93, 82, 0.1);
+            // background-color: rgba(94, 93, 82, 0.1);
           }
         }
       }
@@ -2497,11 +2497,12 @@ li.card {
         @media (min-width: $bp-lisa) {
           border-left: 1px solid rgba(29, 150, 178, 1);
           border-bottom: 1px solid rgba(29, 150, 178, 1);
+          border-top: 1px solid rgba(29, 150, 178, 1);
         }
 
         @media (min-width: $bp-bart) {
           background-color: transparent;
-          color: rgba(94, 93, 82, 1);
+          // color: rgba(94, 93, 82, 1);
           text-align: left;
         }
       }
@@ -2512,6 +2513,8 @@ li.card {
         @media (min-width: $bp-bart) {
           border-left: 1px solid rgba(29, 150, 178, 1);
           border-bottom: 1px solid rgba(29, 150, 178, 1);
+          border-top: 1px solid rgba(29, 150, 178, 1);
+
           text-align: center;
         }
 
@@ -2530,7 +2533,7 @@ li.card {
         content: attr(data-title);
         float: left;
         font-size: 0.8em;
-        color: rgba(94, 93, 82, 0.75);
+        // color: rgba(94, 93, 82, 0.75);
 
         @media (min-width: $bp-lisa) {
           font-size: 0.9em;
@@ -2548,26 +2551,35 @@ li.card {
     padding: 0 !important;
     border: none !important;
     .printAnnotation {
-      background: #efefed;
+      background: #fff;
       width: 286%;
       max-width: 286%;
       min-width: 286%;
       margin: 0;
       display: flex;
+      text-align: left;
+      .heading {
+        padding: 5px;
+        color: #333333;
+        opacity: 0.9;
+        // font-weight: bold;
+      }
 
       .printUID {
-        width: 50%;
-        border-bottom: 1px solid #1d96b2;
-        border-right: 1px solid #1d96b2;
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        word-wrap: break-word;
 
-        padding: 25px 0px;
+        padding: 5px 0px;
       }
       .printTA {
-        width: 50%;
-        border-bottom: 1px solid #1d96b2;
-        border-left: 1px solid #1d96b2;
-
-        padding: 25px 0px;
+        min-width: 100%;
+        max-width: 100%;
+        width: 100%;
+        word-wrap: break-word;
+        opacity: 0.8;
+        padding: 5px 0px;
       }
     }
   }
@@ -2703,7 +2715,6 @@ li.card {
     top: 10px;
     left: 10px;
     margin-bottom: -20px;
-    border: 1px solid red;
     span {
       color: #333;
     }

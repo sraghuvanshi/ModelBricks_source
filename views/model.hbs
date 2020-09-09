@@ -34,13 +34,15 @@
                     {{#each data.vcml.BioModel}}
                     {{#each this.SimulationSpec as |value key|}}
                     <li class="drop child">
-                        <a href="#specifications{{key}}" class="dropTitle"><i class="fa fa-folder-o static"
+                        <a href="#specsSpecies{{key}}" class="dropTitle"><i class="fa fa-folder-o static"
                                 aria-hidden="true"></i>
                             <span class="wordLimit">{{value.$.Name}}</span><i class="fa fa-angle-down dynamic"></i>
                         </a>
                         <ul class="subMenu">
-                            <li><a href="#specifications{{key}}"><i class="fa fa-pencil-square-o static"
-                                        aria-hidden="true"></i>Specifications</a></li>
+                            <li><a href="#specsSpecies{{key}}"><i class="fa fa-pencil-square-o static"
+                                        aria-hidden="true"></i>Specs - Species</a></li>
+                            <li><a href="#specsReaction{{key}}"><i class="fa fa-pencil-square-o static"
+                                        aria-hidden="true"></i>Specs - Reactions</a></li>
                             <li><a href="#simulations{{key}}"><i class="fa fa-superpowers static"
                                         aria-hidden="true"></i>Simulations</a></li>
                         </ul>
@@ -54,6 +56,11 @@
                     Global Parameters
                 </a>
             </li>
+            <li class="drop">
+                <a href="#downloads" class="dropTitle"><i class="fa fa-globe static" aria-hidden="true"></i>
+                    Downloads
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -63,9 +70,13 @@
             {{#each this.Version}}
             <li><a id="modelName" href="#dashboard">{{trimString this.$.Name}} -
                     {{this.$.KeyValue}}</a></li>
-            <li class="printable"><a href="/curatedList/printModel/{{this.$.KeyValue}}"><i class="fa fa-print"
-                        aria-hidden="true"></i></a>
+            <li class="printable"><a href="/curatedList/printModel/{{this.$.KeyValue}}/{{this.$.Name}}"><i
+                        class="fa fa-print" aria-hidden="true"></i></a>
             </li>
+
+            {{!-- var define for downloads section. used in json.js file. --}}
+            <li style="display: none"><a id="selectedModel">{{this.$.Name}}</a></li>
+
             {{/each}}
             {{/each}}
         </ul>
@@ -193,7 +204,7 @@
                 {{#each this.SimpleReaction as |value key|}}
                 <div class="popup box-{{value.$.Name}}">
                     <div class='popup-text'>
-                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+                        <h3>Reaction Name: <span>{{value.$.Name}}</span></h3>
 
 
                         {{!-- universal ID's  --}}
@@ -220,7 +231,7 @@
                 {{#each value.Kinetics}}
                 <div class="popup box-{{key}}">
                     <div class='popup-text block'>
-                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+                        <h3>Reaction Name: <span>{{value.$.Name}}</span></h3>
                         {{!-- Expressions --}}
                         <h2 id="reactionNameExp">Expressions</h2>
 
@@ -318,14 +329,14 @@
                 {{#each this.Membrane as |value key|}}
                 <div class="popup box-{{value.$.Name}}">
                     <div class='popup-text'>
-                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+                        <h3>Structure Name: <span>{{value.$.Name}}</span></h3>
 
                         {{!-- universal ID's  --}}
                         <div class="uid" id="structureUID-{{value.$.Name}}">
                             <h2>Universal ID's</h2>
                         </div>
                         {{!-- annotation --}}
-                        <div class="textAnnotation" id="structureTATA-{{value.$.Name}}">
+                        <div class="textAnnotation" id="structureTA-{{value.$.Name}}">
                             <h2>Text Annotations</h2>
                         </div>
 
@@ -343,14 +354,14 @@
                 {{#each this.Feature as |value key|}}
                 <div class="popup box-{{value.$.Name}}">
                     <div class='popup-text'>
-                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+                        <h3>Structure Name: <span>{{value.$.Name}}</span></h3>
 
                         {{!-- universal ID's  --}}
                         <div class="uid" id="structureUID-{{value.$.Name}}">
                             <h2>Universal ID's</h2>
                         </div>
                         {{!-- annotation --}}
-                        <div class="textAnnotation" id="structureTATA-{{value.$.Name}}">
+                        <div class="textAnnotation" id="structureTA-{{value.$.Name}}">
                             <h2>Text Annotations</h2>
                         </div>
 
@@ -415,7 +426,7 @@
                 {{#each this.LocalizedCompound as |value key|}}
                 <div class="popup box-{{value.$.Name}}">
                     <div class='popup-text'>
-                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+                        <h3>Species Name: <span>{{value.$.Name}}</span></h3>
 
                         {{!-- universal ID's  --}}
                         <div class="uid" id="speciesUID-{{value.$.Name}}">
@@ -504,7 +515,7 @@
                 {{#each this.MolecularType as |value key|}}
                 <div class="popup box-{{value.$.Name}}">
                     <div class='popup-text'>
-                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+                        <h3>Molucule Name: <span>{{value.$.Name}}</span></h3>
 
                         {{!-- universal ID's  --}}
                         <div class="uid" id="moleculesUID-{{value.$.Name}}">
@@ -543,32 +554,32 @@
                                                     class="fa fa-chevron-up"></i></button></a>
                                     </div>
                                 </th>
-                                <th class="Type">Type
+                                <th class="Domain">Domain
                                     <div class="sort-table-arrows">
-                                        <a href="javascript:sort(true, 'Type', 'content-table3');"><button
+                                        <a href="javascript:sort(true, 'Domain', 'content-table3');"><button
                                                 class="button" title="down arrow"><i
                                                     class="fa fa-chevron-down"></i></button></a>
-                                        <a href="javascript:sort(false, 'Type', 'content-table3');"><button
+                                        <a href="javascript:sort(false, 'Domain', 'content-table3');"><button
                                                 class="button" title="up arrow"><i
                                                     class="fa fa-chevron-up"></i></button></a>
                                     </div>
                                 </th>
-                                <th class="BioNetGen">BioNetGen Defination
+                                <th class="MolecularType">Molecular Type
                                     <div class="sort-table-arrows">
-                                        <a href="javascript:sort(true, 'BioNetGen', 'content-table3');"><button
+                                        <a href="javascript:sort(true, 'MolecularType', 'content-table3');"><button
                                                 class="button" title="down arrow"><i
                                                     class="fa fa-chevron-down"></i></button></a>
-                                        <a href="javascript:sort(false, 'BioNetGen', 'content-table3');"><button
+                                        <a href="javascript:sort(false, 'MolecularType', 'content-table3');"><button
                                                 class="button" title="up arrow"><i
                                                     class="fa fa-chevron-up"></i></button></a>
                                     </div>
                                 </th>
-                                <th class="Count">Count
+                                <th class="SequenceType">Sequence Type
                                     <div class="sort-table-arrows">
-                                        <a href="javascript:sort(true, 'Count', 'content-table3');"><button
+                                        <a href="javascript:sort(true, 'SequenceType', 'content-table3');"><button
                                                 class="button" title="down arrow"><i
                                                     class="fa fa-chevron-down"></i></button></a>
-                                        <a href="javascript:sort(false, 'Count', 'content-table3');"><button
+                                        <a href="javascript:sort(false, 'SequenceType', 'content-table3');"><button
                                                 class="button" title="up arrow"><i
                                                     class="fa fa-chevron-up"></i></button></a>
                                     </div>
@@ -577,18 +588,65 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{#each data.vcml.BioModel}}
+                            {{#each this.Model}}
+                            {{#each this.RbmModelContainer}}
+                            {{#each this.RbmObservableList}}
+                            {{#each this.Observable}}
 
                             <tr>
-                                <td data-label="Name" class="Name">Name</td>
-                                <td data-label="Type" class="Type">Type</td>
-                                <td data-label="BioNetGen" class="BioNetGen">BioNetGen Defination</td>
-                                <td data-label="Count" class="Count">Count</td>
+                                <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
+                                <td data-label="Domain" class="Domain">{{this.$.ObservableType}}</td>
+                                {{#each this.SpeciesPattern}}
+                                {{#each this.MolecularTypePattern}}
+                                {{#each this.MolecularType}}
+                                <td data-label="MolecularType" class="MolecularType">{{this.$.Name}}</td>
+                                {{/each}}
+                                {{/each}}
+                                {{/each}}
+                                <td data-label="SequenceType" class="SequenceType">{{this.$.Sequence}}</td>
 
                             </tr>
+
+                            {{/each}}
+                            {{/each}}
+                            {{/each}}
+                            {{/each}}
+                            {{/each}}
 
                         </tbody>
                     </table>
                 </div>
+
+                {{!-- popup Observables --}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.RbmModelContainer}}
+                {{#each this.RbmObservableList}}
+                {{#each this.Observable as |value key|}}
+                <div class="popup box-{{value.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Observables Name: <span>{{value.$.Name}}</span></h3>
+
+                        {{!-- universal ID's  --}}
+                        <div class="uid" id="observableUID-{{value.$.Name}}">
+                            <h2>Universal ID's</h2>
+                        </div>
+                        {{!-- annotation --}}
+                        <div class="textAnnotation" id="observableTA-{{value.$.Name}}">
+                            <h2>Text Annotations</h2>
+                        </div>
+
+                    </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                </div>
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{!-- popup --}}
             </div>
 
             {{!-- Applications Table  --}}
@@ -620,16 +678,6 @@
                                                     class="fa fa-chevron-up"></i></button></a>
                                     </div>
                                 </th>
-                                <th class="Annotation">Annotation
-                                    <div class="sort-table-arrows">
-                                        <a href="javascript:sort(true, 'Annotation', 'content-table3');"><button
-                                                class="button" title="down arrow"><i
-                                                    class="fa fa-chevron-down"></i></button></a>
-                                        <a href="javascript:sort(false, 'Annotation', 'content-table3');"><button
-                                                class="button" title="up arrow"><i
-                                                    class="fa fa-chevron-up"></i></button></a>
-                                    </div>
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -639,13 +687,14 @@
                             <tr>
                                 <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
                                         style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
-                                <td data-label="Name" class="Name">
-                                    <a href="#specifications{{key}}"
-                                        style="cursor:pointer; color:#3EB9FE">Specifications</a>
+                                <td data-label="properties" class="properties">
+                                    <a href="#specsSpecies{{key}}" style="cursor:pointer; color:#3EB9FE">Specs -
+                                        Species</a> <br>
+                                    <a href="#specsReaction{{key}}" style="cursor:pointer; color:#3EB9FE">Specs -
+                                        Reaction</a> <br>
                                     <a href="#simulations{{key}}" style="cursor:pointer; color:#3EB9FE">Simulations</a>
                                 </td>
                                 <td data-label="Type" class="Type"></td>
-                                <td data-label="Annotation" class="Annotation">{{value.Annotation}}</td>
                             </tr>
 
                             {{/each}}
@@ -658,7 +707,7 @@
                 {{#each this.SimulationSpec as |value key|}}
                 <div class="popup box-{{value.$.Name}}">
                     <div class='popup-text'>
-                        <h3>Element Name: <span>{{value.$.Name}}</span></h3>
+                        <h3>Application Name: <span>{{value.$.Name}}</span></h3>
 
                         {{!-- annotation --}}
                         <h2>Text Annotations</h2>
@@ -681,9 +730,9 @@
             {{#each data.vcml.BioModel}}
             {{#each this.SimulationSpec as |value key|}}
 
-            {{!-- specifications table  --}}
-            <div id="specifications{{key}}" class="optionData">
-                <h2 class="header">Specifications - {{value.$.Name}} <span class="propertyBtn"><a
+            {{!-- specifications - Species table  --}}
+            <div id="specsSpecies{{key}}" class="optionData">
+                <h2 class="header">Specifications (Species) - {{value.$.Name}} <span class="propertyBtn"><a
                             href="#simulations{{key}}">go to
                             Simulations</a></span> </h2>
                 <div class="modelTable">
@@ -728,12 +777,7 @@
                             {{#each value.ReactionContext}}
                             {{#each this.LocalizedCompoundSpec}}
                             <tr>
-                                <td data-label="Species" class="Species"><a id={{this.$.LocalizedCompoundRef}}
-                                        onClick="reply_click(this.id)"
-                                        style="cursor:pointer; color:#3EB9FE">{{this.$.LocalizedCompoundRef}}<i
-                                            class="fa fa-info"
-                                            style="margin-left:10px; color:#333; opacity:0.4; font-size: 0.7em;"
-                                            aria-hidden="true"></i></a></td>
+                                <td data-label="Species" class="Species">{{this.$.LocalizedCompoundRef}}</td>
                                 <td data-label="Initial" class="Initial">{{this.InitialConcentration}}</td>
                                 <td data-label="Diffusion" class="Diffusion">{{this.Diffusion}}</td>
                             </tr>
@@ -743,27 +787,53 @@
                         </tbody>
                     </table>
                 </div>
-                {{!-- popup specifications   --}}
-                {{#each value.ReactionContext}}
-                {{#each this.LocalizedCompoundSpec}}
-                <div class="popup box-{{this.$.LocalizedCompoundRef}}">
-                    <div class='popup-text'>
-                        <h3>Element Name: <span>{{this.$.LocalizedCompoundRef}}</span></h3>
+            </div>
+            {{!-- specifications - Reaction table  --}}
+            <div id="specsReaction{{key}}" class="optionData">
+                <h2 class="header">Specifications (Reaction) - {{value.$.Name}} <span class="propertyBtn"><a
+                            href="#simulations{{key}}">go to
+                            Simulations</a></span> </h2>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Name">Name
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Name', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Name', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
 
-                        {{!-- annotation --}}
-                        <h2>Text Annotations</h2>
-                        <p>Annotations will come here</p>
+                                <th class="ReactionMapping">Reaction Mapping
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'ReactionMapping', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'ReactionMapping', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        {{!-- universal ID's  --}}
-                        <h2>Universal ID's</h2>
-                        <p>RFID | pubmed</p>
+                            {{#each value.ReactionContext}}
+                            {{#each this.ReactionSpec}}
+                            <tr>
+                                <td data-label="Name" class="Name">{{this.$.ReactionStepRef}}</td>
+                                <td data-label="ReactionMapping" class="ReactionMapping">{{this.$.ReactionMapping}}</td>
+                            </tr>
 
-                    </div>
-                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                            {{/each}}
+                            {{/each}}
+                        </tbody>
+                    </table>
                 </div>
-                {{/each}}
-                {{/each}}
-                {{!-- popup specifications   --}}
             </div>
 
             {{!-- simulations table  --}}
@@ -826,29 +896,33 @@
                         </tbody>
                     </table>
                 </div>
-                {{!-- popup simulations   --}}
+                {{!-- popup Simulations --}}
                 {{#each value.Simulation}}
                 <div class="popup box-{{this.$.Name}}">
                     <div class='popup-text'>
-                        <h3>Element Name: <span>{{this.$.Name}}</span></h3>
-
-                        {{!-- annotation --}}
-                        <h2>Text Annotations</h2>
-                        <p>Annotations will come here</p>
+                        <h3>Simulation Name: <span>{{this.$.Name}}</span></h3>
 
                         {{!-- universal ID's  --}}
-                        <h2>Universal ID's</h2>
-                        <p>RFID | pubmed</p>
+                        <div class="uid" id="UID-{{this.$.Name}}">
+                            <h2>Universal ID's</h2>
+                        </div>
+                        {{!-- annotation --}}
+                        <div class="textAnnotation" id="TA-{{this.$.Name}}">
+                            <h2>Text Annotations</h2>
+                        </div>
 
                     </div>
                     <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
                 </div>
+
                 {{/each}}
-                {{!-- popup simulations   --}}
+                {{!-- popup --}}
             </div>
             {{/each}}
             {{/each}}
 
+
+            {{!-- Gloabal Parameters --}}
             <div id="global" class="optionData">
                 <h2 class="header">Global Parameters</h2>
                 <div class="modelTable">
@@ -883,7 +957,8 @@
                             {{#each this.ModelParameters}}
                             {{#each this.Parameter}}
                             <tr>
-                                <td data-label="Name" class="Name">{{this.$.Name}}</td>
+                                <td data-label="Name" class="Name"><a id={{this.$.Name}} onClick="reply_click(this.id)"
+                                        style="cursor:pointer; color:#3EB9FE">{{this.$.Name}}</a></td>
                                 <td data-label="Expression" class="Expression">{{this._}}<span
                                         class="unit">[{{this.$.Unit}}]</span></td>
                             </tr>
@@ -894,7 +969,77 @@
                         </tbody>
                     </table>
                 </div>
+                {{!-- popup parameters --}}
+                {{#each data.vcml.BioModel}}
+                {{#each this.Model}}
+                {{#each this.ModelParameters}}
+                {{#each this.Parameter}}
+                <div class="popup box-{{this.$.Name}}">
+                    <div class='popup-text'>
+                        <h3>Global Parameter Name: <span>{{this.$.Name}}</span></h3>
 
+                        {{!-- universal ID's  --}}
+                        <div class="uid" id="parameterUID-{{this.$.Name}}">
+                            <h2>Universal ID's</h2>
+                        </div>
+                        {{!-- annotation --}}
+                        <div class="textAnnotation" id="parameterTA-{{this.$.Name}}">
+                            <h2>Text Annotations</h2>
+                        </div>
+
+                    </div>
+                    <a class='popup-close' href="#reactions"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                </div>
+
+                {{/each}}
+                {{/each}}
+                {{/each}}
+                {{/each}}
+
+                {{!-- popup --}}
+            </div>
+
+            {{!-- Downloads --}}
+            <div id="downloads" class="optionData">
+                <h2 class="header">Downloads</h2>
+                <div class="modelTable">
+                    <table id="content-table3" class="table-responsive-full sort-table">
+                        <thead>
+                            <tr>
+                                <th class="Format">Format
+                                    <div class="sort-table-arrows">
+                                        <a href="javascript:sort(true, 'Format', 'content-table3');"><button
+                                                class="button" title="down arrow"><i
+                                                    class="fa fa-chevron-down"></i></button></a>
+                                        <a href="javascript:sort(false, 'Format', 'content-table3');"><button
+                                                class="button" title="up arrow"><i
+                                                    class="fa fa-chevron-up"></i></button></a>
+                                    </div>
+                                </th>
+                                <th class="File">File
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="bngl">
+                                <td data-label="Format" class="Format">BNGL</td>
+                                <td data-label="File" class="File"><span class="unit">Not Available</span></td>
+                            </tr>
+                            <tr id="m">
+                                <td data-label="Format" class="Format">.Metlab</td>
+                                <td data-label="File" class="File"><span class="unit">Not Available</span></td>
+                            </tr>
+                            <tr id="sbml">
+                                <td data-label="Format" class="Format">SBML</td>
+                                <td data-label="File" class="File"><span class="unit">Not Available</span></td>
+                            </tr>
+                            <tr id="xml">
+                                <td data-label="Format" class="Format">Formatted XML</td>
+                                <td data-label="File" class="File"><span class="unit">Not Available</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
