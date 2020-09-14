@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <BioModel name="CM_PM12648679_MB8::Negative_feedback_homeostasis">
+  <math name="Deterministic">Deterministic (ODE), Compartmental</math>
   <url name="MolecularType(E)">http://identifiers.org/chebi:CHEBI%3A36080</url>
   <url name="MolecularType(R)">http://identifiers.org/obo.go:GO%3A0016301</url>
   <url name="MolecularType(R)">http://identifiers.org/chebi:CHEBI%3A36080</url>

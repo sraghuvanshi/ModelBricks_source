@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <BioModel name="CM_PM25628036_MB3::Rho_GDP_GTP_exchange">
+  <math name="GDI_integrated">Deterministic (ODE), Compartmental</math>
   <url name="MolecularType(RhoGAP)">http://identifiers.org/uniprot:Q07960</url>
   <url name="MolecularType(RhoGAP)">http://identifiers.org/uniprot:Q92888</url>
   <url name="MolecularType(RhoGAP)">http://identifiers.org/uniprot:Q92888</url>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <BioModel name="CM_PM18628746_MB1::Rab5_switch">
+  <math name="Deterministic">Deterministic (ODE), Compartmental</math>
   <url name="MolecularType(GTP)">http://identifiers.org/chebi:CHEBI%3A15996</url>
   <url name="MolecularType(GDP)">http://identifiers.org/chebi:CHEBI%3A17552</url>
   <url name="BioModel(CM_PM18628746_MB1::Rab5_switch)">http://identifiers.org/mamo/MAMO_0000046</url>
