@@ -1,13 +1,15 @@
 <div class="sectionDescription">
     {{#each data.vcml.BioModel}}
     {{#each this.Version}}
+    <span class="dashboardBtn"><a href="/curatedList/model/{{this.$.Name}}#dashboard"><i class="fa fa-undo"
+                aria-hidden="true"></i> Dashboard</a></span>
     <h2>Name - <span>{{trimString this.$.Name}}</span></h2>
     <h2>BioModel ID - <span>{{this.$.KeyValue}}</span></h2>
     {{/each}}
     {{/each}}
 </div>
 
-<div class="rxnDiagram">
+<div class=" rxnDiagram">
     <h2 class="sectionTitle">Reaction Diagram</h2>
     {{#each data.vcml.BioModel}}
     {{#each this.Version}}

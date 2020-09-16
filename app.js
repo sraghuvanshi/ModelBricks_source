@@ -76,7 +76,7 @@ app.get("/json", (req, res) => {
 app.get("/ajson", (req, res) => {
   var parser = new xml2js.Parser();
   fs.readFile(
-    "./annotations/CM_PM25628036_MB4::Rho_GDI_binding_annoations.xml",
+    "./files/CM_PM25628036_MB4::Rho_GDI_binding_annoations.xml",
     (err, data) => {
       parser.parseString(data, (err, result) => {
         res.send(result);
@@ -131,24 +131,21 @@ app.get("/curatedList/search", async (req, res) => {
 });
 
 // main Dashboard for dynamic models selected from curated list page
-app.get("/curatedList/model/:id/:name", (req, res) => {
+app.get("/curatedList/model/:name", (req, res) => {
   // var info = "null";
   var parser = new xml2js.Parser();
-  fs.readFile(
-    "./biomodels/Biomodel_" + req.params.id + ".vcml",
-    (err, data) => {
-      parser.parseString(data, (err, result) => {
-        data = result;
-        res.render("model", {
-          title: "ModelBricks - Model Page",
-          data,
-        });
+  fs.readFile("./files/" + req.params.name + ".vcml", (err, data) => {
+    parser.parseString(data, (err, result) => {
+      data = result;
+      res.render("model", {
+        title: "ModelBricks - Model Page",
+        data,
       });
-    }
-  );
+    });
+  });
   var parser = new xml2js.Parser();
   fs.readFile(
-    "./annotations/" + req.params.name + "_annotations.xml",
+    "./files/" + req.params.name + "_annotations.xml",
     (err, data) => {
       parser.parseString(data, (err, result) => {
         info = result;
@@ -160,33 +157,30 @@ app.get("/curatedList/model/:id/:name", (req, res) => {
 });
 
 // dynamic printable pages, option available on dashboard page
-app.get("/curatedList/printModel/:id/:name", (req, res) => {
+app.get("/curatedList/printModel/:name", (req, res) => {
   var parser = new xml2js.Parser();
-  fs.readFile(
-    "./biomodels/Biomodel_" + req.params.id + ".vcml",
-    (err, data) => {
-      parser.parseString(data, (err, result) => {
-        const data = result;
-        // generating static html pages in ./public/html
-        var template = handlebars.compile(
-          fs.readFileSync("./temp/modelTemplate.html", "utf8")
-        );
-        var generated = template({ data: data });
-        fs.writeFileSync(
-          "./public/html/" + "model_" + req.params.id + ".html",
-          generated,
-          "utf-8"
-        );
-        res.render("printModel", {
-          title: "ModelBricks - Model Print Page",
-          data,
-        });
+  fs.readFile("./files/" + req.params.name + ".vcml", (err, data) => {
+    parser.parseString(data, (err, result) => {
+      const data = result;
+      // generating static html pages in ./public/html
+      var template = handlebars.compile(
+        fs.readFileSync("./temp/modelTemplate.html", "utf8")
+      );
+      var generated = template({ data: data });
+      fs.writeFileSync(
+        "./public/html/" + "model_" + req.params.id + ".html",
+        generated,
+        "utf-8"
+      );
+      res.render("printModel", {
+        title: "ModelBricks - Model Print Page",
+        data,
       });
-    }
-  );
+    });
+  });
   var parser = new xml2js.Parser();
   fs.readFile(
-    "./annotations/" + req.params.name + "_annotations.xml",
+    "./files/" + req.params.name + "_annotations.xml",
     (err, data) => {
       parser.parseString(data, (err, result) => {
         info = result;

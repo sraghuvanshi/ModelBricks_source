@@ -4,8 +4,9 @@ if (subMenus.length) {
     dropdown.addEventListener("click", (event) => {
       let target = event.target.closest(".drop").childNodes[3];
       let icon = event.target.childNodes[1];
-
-      target.classList.toggle("active");
+      if (target) {
+        target.classList.toggle("active");
+      }
 
       if (icon.classList.value === "fa fa-angle-down") {
         icon.classList.value = "fa fa-angle-up";

@@ -2574,12 +2574,13 @@ li.card {
         padding: 5px 0px;
       }
       .printTA {
-        min-width: 100%;
-        max-width: 100%;
-        width: 100%;
+        min-width: 300px;
+        max-width: 600px;
+        // width: 600px;
         word-wrap: break-word;
         opacity: 0.8;
         padding: 5px 0px;
+        border: 1px solid green;
       }
     }
   }
@@ -2588,9 +2589,26 @@ li.card {
 .sectionDescription {
   width: 50%;
   margin: 80px auto 40px;
-  color: #333;
+  color: rgb(138, 138, 138);
   span {
-    color: #0091c2;
+    color: #333;
+  }
+  span.dashboardBtn {
+    float: right;
+    position: absolute;
+    right: 100px;
+    // border: 2px solid green;
+    a {
+      margin-left: 10px;
+      opacity: 1;
+      font-style: italic;
+      font-size: 1.2em;
+      transition: 0.5s ease;
+      color: #3eb9fe;
+    }
+    a:hover {
+      color: #3eb9fe;
+    }
   }
 }
 
@@ -2598,7 +2616,7 @@ li.card {
   font-family: sans-serif;
   text-align: center;
   padding: 40px;
-  color: #0091c2;
+  color: #333;
 }
 
 .rxnDiagram {

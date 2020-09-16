@@ -2642,29 +2642,49 @@ input:not(:placeholder-shown):not(.datalist-input):invalid {
 }
 
 .pmTable .printAnnotationWrap .printAnnotation .printTA {
-  min-width: 100%;
-  max-width: 100%;
-  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
   word-wrap: break-word;
   opacity: 0.8;
   padding: 5px 0px;
+  border: 1px solid green;
 }
 
 .sectionDescription {
   width: 50%;
   margin: 80px auto 40px;
-  color: #333;
+  color: #8a8a8a;
 }
 
 .sectionDescription span {
-  color: #0091c2;
+  color: #333;
+}
+
+.sectionDescription span.dashboardBtn {
+  float: right;
+  position: absolute;
+  right: 100px;
+}
+
+.sectionDescription span.dashboardBtn a {
+  margin-left: 10px;
+  opacity: 1;
+  font-style: italic;
+  font-size: 1.2em;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  color: #3eb9fe;
+}
+
+.sectionDescription span.dashboardBtn a:hover {
+  color: #3eb9fe;
 }
 
 .sectionTitle {
   font-family: sans-serif;
   text-align: center;
   padding: 40px;
-  color: #0091c2;
+  color: #333;
 }
 
 .rxnDiagram {
