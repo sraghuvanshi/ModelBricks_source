@@ -966,6 +966,13 @@ fetch("/downloads/" + selectedModelName + ".sbml.xml").then((response) => {
     </a> 
     `;
   }
+  if (!response.ok) {
+    let selectedFile = document.getElementById(`sbmlFile`);
+    selectedFile.innerHTML = `
+      Not Available
+      `;
+    throw new Error("Not 2xx response");
+  }
 });
 
 // metlab file

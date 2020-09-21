@@ -238,20 +238,42 @@ a {
 }
 
 // Navbar done
-// section 1
+// Info Pages
 
-.section1 {
-  display: flex;
-  justify-content: center;
-  // padding: 20px;
+.infoPages {
   margin-top: 50px;
+  // border: 1px solid red;
+  padding: 10px 10px 50px 10px;
 
-  h2 {
-    font-weight: 400;
+  .pageHeading {
+    font-weight: 500;
+    font-size: 1.8em;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .pageContent {
+    // border: 1px solid green;
+    padding: 0px 50px;
+
+    .pageSubheading {
+      font-weight: 500;
+      font-size: 1.5em;
+      margin: 20px 0px 10px 0px;
+      color: #333;
+    }
+
+    .pageContentCenter {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      // border: 1px solid pink;
+    }
   }
 }
 
-// section 1 done
+// Info Pages done
 // section 2
 
 .section2 {
@@ -1568,21 +1590,12 @@ li.card {
   justify-content: center;
   align-items: center;
   margin: 0;
-  padding: 1em;
+  // padding: 1em;
   animation: animBg 30s ease infinite;
-  background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
-
-  .iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .icon-arrow::before {
-    content: "\e625";
-  }
+  // border: 1px solid red;
+  // background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
+  width: 40%;
+  margin: auto;
 
   .custom-form {
     --cor-escura: #192a3d;
@@ -1595,7 +1608,7 @@ li.card {
     --cor-derrota: #cc0000;
 
     background-color: white;
-    padding: 30px 20px;
+    // padding: 30px 20px;
     border-radius: 3px;
     width: 90%;
   }
@@ -1619,9 +1632,10 @@ li.card {
   }
 
   .custom-form {
-    margin-top: 20px;
+    // margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
+    // border: 1px solid green;
   }
 
   .custom-form .custom-form__submit svg {
@@ -1968,6 +1982,7 @@ li.card {
   color: #333;
   text-align: center;
   padding: 40px;
+  padding-bottom: 10px;
 }
 
 // search page
@@ -2580,7 +2595,7 @@ li.card {
         word-wrap: break-word;
         opacity: 0.8;
         padding: 5px 0px;
-        border: 1px solid green;
+        // border: 1px solid green;
       }
     }
   }

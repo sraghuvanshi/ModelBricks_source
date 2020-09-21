@@ -7,11 +7,12 @@ if (subMenus.length) {
       if (target) {
         target.classList.toggle("active");
       }
-
-      if (icon.classList.value === "fa fa-angle-down") {
-        icon.classList.value = "fa fa-angle-up";
-      } else if (icon.classList.value === "fa fa-angle-up") {
-        icon.classList.value = "fa fa-angle-down";
+      if (icon) {
+        if (icon.classList.value === "fa fa-angle-down") {
+          icon.classList.value = "fa fa-angle-up";
+        } else if (icon.classList.value === "fa fa-angle-up") {
+          icon.classList.value = "fa fa-angle-down";
+        }
       }
 
       console.log(f);
