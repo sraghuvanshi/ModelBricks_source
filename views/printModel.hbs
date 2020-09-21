@@ -77,6 +77,21 @@
                             </div>
                         </div>
                     </td>
+                    {{#each this.Kinetics}}
+                    {{#each this.Parameter}}
+                    <td class="printAnnotationWrap">
+                        <div class="printAnnotation">
+
+                            {{!-- Kinetics --}}
+                            <div class="printTA">
+                                <p class="heading"> Reaction rate: {{this._}} <span
+                                        class="unit">[{{this.$.Unit}}]</span></p>
+                            </div>
+                        </div>
+                    </td>
+                    {{/each}}
+                    {{/each}}
+
                 </tr>
                 {{/each}}
                 {{/each}}

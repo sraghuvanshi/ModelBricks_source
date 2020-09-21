@@ -948,6 +948,19 @@ fetch("/json/annotations.json")
         }
       }
     }
+
+    // Math Type -------------------------->
+
+    for (i in json.BioModel.math) {
+      var text = json.BioModel.math[i]._;
+      var name = json.BioModel.math[i].$.name;
+      let mathType = document.getElementById("mathType");
+      if (mathType != null) {
+        mathType.innerHTML += `
+            <p>${text}</p>
+            `;
+      }
+    }
   });
 
 // downloads section
@@ -986,6 +999,13 @@ fetch("/downloads/" + selectedModelName + ".m").then((response) => {
     </a> 
     `;
   }
+  if (!response.ok) {
+    let selectedFile = document.getElementById(`metlabFile`);
+    selectedFile.innerHTML = `
+      Not Available
+      `;
+    throw new Error("Not 2xx response");
+  }
 });
 
 // BNGL file
@@ -998,6 +1018,13 @@ fetch("/downloads/" + selectedModelName + ".bngl").then((response) => {
     <button type="button">Download File</button> 
     </a> 
     `;
+  }
+  if (!response.ok) {
+    let selectedFile = document.getElementById(`bnglFile`);
+    selectedFile.innerHTML = `
+      Not Available
+      `;
+    throw new Error("Not 2xx response");
   }
 });
 
@@ -1012,6 +1039,13 @@ fetch("/downloads/" + selectedModelName + "_formatted.xml").then((response) => {
     </a> 
     `;
   }
+  if (!response.ok) {
+    let selectedFile = document.getElementById(`fxmlFile`);
+    selectedFile.innerHTML = `
+      Not Available
+      `;
+    throw new Error("Not 2xx response");
+  }
 });
 
 // SEDML file
@@ -1024,6 +1058,13 @@ fetch("/downloads/" + selectedModelName + ".sedml.xml").then((response) => {
     <button type="button">Download File</button> 
     </a> 
     `;
+  }
+  if (!response.ok) {
+    let selectedFile = document.getElementById(`sedmlFile`);
+    selectedFile.innerHTML = `
+      Not Available
+      `;
+    throw new Error("Not 2xx response");
   }
 });
 
@@ -1038,6 +1079,13 @@ fetch("/downloads/" + selectedModelName + "_Deterministic.xml").then(
     <button type="button">Download File</button> 
     </a> 
     `;
+    }
+    if (!response.ok) {
+      let selectedFile = document.getElementById(`dxmlFile`);
+      selectedFile.innerHTML = `
+        Not Available
+        `;
+      throw new Error("Not 2xx response");
     }
   }
 );
