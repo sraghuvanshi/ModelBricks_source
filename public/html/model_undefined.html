@@ -80,8 +80,8 @@
     <!-- model data  -->
     <div class="sectionDescription">
        
-      <h2>Name - <span>CM_PM12648679_MB5::Activator_inhibitor</span></h2>
-      <h2>BioModel ID - <span>188152002</span></h2>
+      <h2>Name - <span>CM_PM25628036_MB3::Rho_GDP_GTP_exchange</span></h2>
+      <h2>BioModel ID - <span>176196222</span></h2>
        
     </div>
 
@@ -90,7 +90,7 @@
        
       <img
         class="image-zoom-available"
-        src="https://vcellapi-beta.cam.uchc.edu:8080/biomodel/188152002/diagram"
+        src="https://vcellapi-beta.cam.uchc.edu:8080/biomodel/176196222/diagram"
         alt="reactionDiagram"
         draggable="false"
       />
@@ -116,11 +116,13 @@
               
             <tr>
               <td data-title="Reaction">
-                                <span style="color: #666666;">--></span>
-                 R 
+                 RhoGTP
+ Effector
+                <span style="color: #666666">--></span>
+                 Effector_RhoGTP 
               </td>
-              <td data-title="Name">R_synthesis</td>
-              <td data-title="Structure">env</td>
+              <td data-title="Name">Effector_activation</td>
+              <td data-title="Structure">default</td>
               <td data-title="Kinetics">
                  GeneralKinetics 
               </td>
@@ -128,11 +130,12 @@
             
             <tr>
               <td data-title="Reaction">
-                                <span style="color: #666666;">--></span>
-                 R 
+                 RhoGTP
+                <span style="color: #666666">--></span>
+                 RhoGDP 
               </td>
-              <td data-title="Name">R_synthesis2</td>
-              <td data-title="Structure">env</td>
+              <td data-title="Name">RhoGTP_to_RhoGDP</td>
+              <td data-title="Structure">default</td>
               <td data-title="Kinetics">
                  GeneralKinetics 
               </td>
@@ -140,76 +143,12 @@
             
             <tr>
               <td data-title="Reaction">
-                 R
-                <span style="color: #666666;">--></span>
-                
+                 RhoGDP
+                <span style="color: #666666">--></span>
+                 RhoGTP 
               </td>
-              <td data-title="Name">R_degradation</td>
-              <td data-title="Structure">env</td>
-              <td data-title="Kinetics">
-                 GeneralKinetics 
-              </td>
-            </tr>
-            
-            <tr>
-              <td data-title="Reaction">
-                 R
-                <span style="color: #666666;">--></span>
-                
-              </td>
-              <td data-title="Name">R_degradation_by_X</td>
-              <td data-title="Structure">env</td>
-              <td data-title="Kinetics">
-                 GeneralKinetics 
-              </td>
-            </tr>
-            
-            <tr>
-              <td data-title="Reaction">
-                 E
-                <span style="color: #666666;">--></span>
-                 Ep 
-              </td>
-              <td data-title="Name">E_phosphorylation</td>
-              <td data-title="Structure">env</td>
-              <td data-title="Kinetics">
-                 GeneralKinetics 
-              </td>
-            </tr>
-            
-            <tr>
-              <td data-title="Reaction">
-                 Ep
-                <span style="color: #666666;">--></span>
-                 E 
-              </td>
-              <td data-title="Name">E_dephosphorylation</td>
-              <td data-title="Structure">env</td>
-              <td data-title="Kinetics">
-                 GeneralKinetics 
-              </td>
-            </tr>
-            
-            <tr>
-              <td data-title="Reaction">
-                                <span style="color: #666666;">--></span>
-                 X 
-              </td>
-              <td data-title="Name">X_synthesis</td>
-              <td data-title="Structure">env</td>
-              <td data-title="Kinetics">
-                 GeneralKinetics 
-              </td>
-            </tr>
-            
-            <tr>
-              <td data-title="Reaction">
-                 X
-                <span style="color: #666666;">--></span>
-                
-              </td>
-              <td data-title="Name">X_degradation</td>
-              <td data-title="Structure">env</td>
+              <td data-title="Name">RhoGDP_to_RhoGTP</td>
+              <td data-title="Structure">default</td>
               <td data-title="Kinetics">
                  GeneralKinetics 
               </td>
@@ -236,7 +175,7 @@
           <tbody>
                    
             <tr>
-              <td data-title="Name">env</td>
+              <td data-title="Name">default</td>
               <td data-title="Type">Compartment</td>
               <td data-title="Electrical">
                 (+) &nbsp;
@@ -264,28 +203,38 @@
           <tbody>
               
             <tr>
-              <td data-title="Name">R</td>
-              <td data-title="Structure">env</td>
+              <td data-title="Name">Active_GEF</td>
+              <td data-title="Structure">default</td>
             </tr>
             
             <tr>
-              <td data-title="Name">X</td>
-              <td data-title="Structure">env</td>
+              <td data-title="Name">RhoGDP</td>
+              <td data-title="Structure">default</td>
             </tr>
             
             <tr>
-              <td data-title="Name">S</td>
-              <td data-title="Structure">env</td>
+              <td data-title="Name">RhoGTP</td>
+              <td data-title="Structure">default</td>
             </tr>
             
             <tr>
-              <td data-title="Name">E</td>
-              <td data-title="Structure">env</td>
+              <td data-title="Name">GDI</td>
+              <td data-title="Structure">default</td>
             </tr>
             
             <tr>
-              <td data-title="Name">Ep</td>
-              <td data-title="Structure">env</td>
+              <td data-title="Name">GAP</td>
+              <td data-title="Structure">default</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">Effector</td>
+              <td data-title="Structure">default</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">Effector_RhoGTP</td>
+              <td data-title="Structure">default</td>
             </tr>
               
           </tbody>
@@ -308,28 +257,38 @@
           <tbody>
               
             <tr>
-              <td data-title="Name">R</td>
-              <td data-title="Link">env</td>
+              <td data-title="Name">Active_GEF</td>
+              <td data-title="Link">default</td>
             </tr>
             
             <tr>
-              <td data-title="Name">X</td>
-              <td data-title="Link">env</td>
+              <td data-title="Name">RhoGDP</td>
+              <td data-title="Link">default</td>
             </tr>
             
             <tr>
-              <td data-title="Name">S</td>
-              <td data-title="Link">env</td>
+              <td data-title="Name">RhoGTP</td>
+              <td data-title="Link">default</td>
             </tr>
             
             <tr>
-              <td data-title="Name">E</td>
-              <td data-title="Link">env</td>
+              <td data-title="Name">GDI</td>
+              <td data-title="Link">default</td>
             </tr>
             
             <tr>
-              <td data-title="Name">Ep</td>
-              <td data-title="Link">env</td>
+              <td data-title="Name">GAP</td>
+              <td data-title="Link">default</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">Effector</td>
+              <td data-title="Link">default</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">Effector_RhoGTP</td>
+              <td data-title="Link">default</td>
             </tr>
               
           </tbody>
@@ -382,9 +341,9 @@
           <tbody>
              
             <tr>
-              <td data-title="Name">Deterministic</td>
+              <td data-title="Name">GDI_integrated</td>
               <td data-title="Math Type"></td>
-              <td data-title="Annotation"></td>
+              <td data-title="Annotation"> </td>
             </tr>
 
              
@@ -394,13 +353,13 @@
     </div>
 
       
-    <h2 class="sectionTitle">0 - Deterministic</h2>
+    <h2 class="sectionTitle">0 - GDI_integrated</h2>
 
     <div class="pmTable">
       <div class="container">
         <table class="responsive-table">
           <caption>
-            Specifications - Deterministic
+            Specifications - GDI_integrated
           </caption>
           <thead>
             <tr>
@@ -413,7 +372,25 @@
           <tbody>
              
             <tr>
-              <td data-title="Species">R</td>
+              <td data-title="Species">Active_GEF</td>
+              <td data-title="Structure"></td>
+              <td data-title="Initial Condition">
+                0.31
+              </td>
+              <td data-title="Diffusion Constant">0.0</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Species">RhoGDP</td>
+              <td data-title="Structure"></td>
+              <td data-title="Initial Condition">
+                1.3
+              </td>
+              <td data-title="Diffusion Constant">0.0</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Species">RhoGTP</td>
               <td data-title="Structure"></td>
               <td data-title="Initial Condition">
                 0.0
@@ -422,37 +399,37 @@
             </tr>
             
             <tr>
-              <td data-title="Species">X</td>
+              <td data-title="Species">GDI</td>
+              <td data-title="Structure"></td>
+              <td data-title="Initial Condition">
+                0.7
+              </td>
+              <td data-title="Diffusion Constant">0.0</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Species">GAP</td>
+              <td data-title="Structure"></td>
+              <td data-title="Initial Condition">
+                0.1
+              </td>
+              <td data-title="Diffusion Constant">0.0</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Species">Effector</td>
+              <td data-title="Structure"></td>
+              <td data-title="Initial Condition">
+                1.0
+              </td>
+              <td data-title="Diffusion Constant">0.0</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Species">Effector_RhoGTP</td>
               <td data-title="Structure"></td>
               <td data-title="Initial Condition">
                 0.0
-              </td>
-              <td data-title="Diffusion Constant">0.0</td>
-            </tr>
-            
-            <tr>
-              <td data-title="Species">S</td>
-              <td data-title="Structure"></td>
-              <td data-title="Initial Condition">
-                0.0
-              </td>
-              <td data-title="Diffusion Constant">0.0</td>
-            </tr>
-            
-            <tr>
-              <td data-title="Species">E</td>
-              <td data-title="Structure"></td>
-              <td data-title="Initial Condition">
-                (Et - Ep)
-              </td>
-              <td data-title="Diffusion Constant">0.0</td>
-            </tr>
-            
-            <tr>
-              <td data-title="Species">Ep</td>
-              <td data-title="Structure"></td>
-              <td data-title="Initial Condition">
-                (((2.0 * (k3 * R) * J4) / ((k4 - (k3 * R)) + (J3 * k4) + (J4 * (k3 * R)) + pow((pow(((k4 - (k3 * R)) + (J3 * k4) + (J4 * (k3 * R))),2.0) - (4.0 * (k4 - (k3 * R)) * (k3 * R) * J4)),(1.0 / 2.0)))) * Et)
               </td>
               <td data-title="Diffusion Constant">0.0</td>
             </tr>
@@ -466,7 +443,7 @@
       <div class="container">
         <table class="responsive-table">
           <caption>
-            Simulations - Deterministic
+            Simulations - GDI_integrated
           </caption>
           <thead>
             <tr>
@@ -479,7 +456,7 @@
             <tr>
               <td data-title="Name">Simulation0</td>
                
-              <td data-title="End Time">10.0</td>
+              <td data-title="End Time">600.0</td>
                
               <td data-title="Output Options">
                 every 
@@ -510,8 +487,28 @@
           <tbody>
                
             <tr>
-              <td data-title="Name">k0</td>
-              <td data-title="Expression">4.0</td>
+              <td data-title="Name">k3</td>
+              <td data-title="Expression">0.5</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">k2</td>
+              <td data-title="Expression">0.1</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">kcatGEF</td>
+              <td data-title="Expression">5.64</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">KmGEFRho</td>
+              <td data-title="Expression">24.5</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">KmGEFGDI</td>
+              <td data-title="Expression">1.0</td>
             </tr>
             
             <tr>
@@ -520,58 +517,48 @@
             </tr>
             
             <tr>
-              <td data-title="Name">k2</td>
-              <td data-title="Expression">1.0</td>
+              <td data-title="Name">kcatGAP</td>
+              <td data-title="Expression">95.9</td>
             </tr>
             
             <tr>
-              <td data-title="Name">k2_prime</td>
-              <td data-title="Expression">1.0</td>
-            </tr>
-            
-            <tr>
-              <td data-title="Name">k3</td>
-              <td data-title="Expression">1.0</td>
-            </tr>
-            
-            <tr>
-              <td data-title="Name">J3</td>
-              <td data-title="Expression">0.3</td>
-            </tr>
-            
-            <tr>
-              <td data-title="Name">k4</td>
-              <td data-title="Expression">1.0</td>
-            </tr>
-            
-            <tr>
-              <td data-title="Name">J4</td>
-              <td data-title="Expression">0.3</td>
-            </tr>
-            
-            <tr>
-              <td data-title="Name">k5</td>
+              <td data-title="Name">KmGAPGDI</td>
               <td data-title="Expression">0.1</td>
             </tr>
             
             <tr>
+              <td data-title="Name">KmGAPRho</td>
+              <td data-title="Expression">4.48</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">k5</td>
+              <td data-title="Expression">0.05</td>
+            </tr>
+            
+            <tr>
+              <td data-title="Name">k4</td>
+              <td data-title="Expression">0.5</td>
+            </tr>
+            
+            <tr>
               <td data-title="Name">k6</td>
-              <td data-title="Expression">0.075</td>
+              <td data-title="Expression">0.5</td>
             </tr>
             
             <tr>
-              <td data-title="Name">Et</td>
-              <td data-title="Expression">1.0</td>
+              <td data-title="Name">k7</td>
+              <td data-title="Expression">0.05</td>
             </tr>
             
             <tr>
-              <td data-title="Name">Km3</td>
-              <td data-title="Expression">(J3 * Et)</td>
+              <td data-title="Name">k8</td>
+              <td data-title="Expression">28.2</td>
             </tr>
             
             <tr>
-              <td data-title="Name">Km4</td>
-              <td data-title="Expression">(J4 * Et)</td>
+              <td data-title="Name">k9</td>
+              <td data-title="Expression">0.18</td>
             </tr>
                
           </tbody>
@@ -584,7 +571,7 @@
     <script src="../public/js/curatedListTable.js"></script>
     <script src="../public/js/subMenu.js"></script>
     <script src="../public/js/navbar.js"></script>
-    <script src="../public/js/json.js"></script>
+    <script src="../public/js/main.js"></script>
     <script src="../public/js/searchForm.js"></script>
     <script src="../public/js/search1.js"></script>
   </body>

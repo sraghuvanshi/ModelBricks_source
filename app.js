@@ -106,10 +106,10 @@ app.get("/curatedList", async (req, res) => {
     "https://vcellapi-beta.cam.uchc.edu:8080/biomodel?bmName=&bmId=&category=all&owner=ModelBrick&savedLow=&savedHigh=&startRow=1&maxRows=1000&orderBy=date_desc";
 
   const fetch_response = await fetch(api_url);
-  const inputData = await fetch_response.json();
+  const json = await fetch_response.json();
   res.render("curatedList", {
     title: "ModelBricks - Curated List",
-    inputData,
+    json,
   });
 });
 
