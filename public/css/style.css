@@ -2729,6 +2729,27 @@ li.card {
   color: #333;
 }
 
+span.dashboardBtn {
+  float: right;
+  position: absolute;
+  right: 10px;
+}
+
+span.dashboardBtn a {
+  margin-left: 10px;
+  opacity: 1;
+  font-style: italic;
+  font-size: 0.7em;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  color: #3eb9fe;
+  font-weight: lighter;
+}
+
+span.dashboardBtn a:hover {
+  color: #3eb9fe;
+}
+
 .sectionDescription span.dashboardBtn {
   float: right;
   position: absolute;
@@ -2736,17 +2757,8 @@ li.card {
 }
 
 .sectionDescription span.dashboardBtn a {
-  margin-left: 10px;
-  opacity: 1;
-  font-style: italic;
   font-size: 1.2em;
-  -webkit-transition: 0.5s ease;
-  transition: 0.5s ease;
-  color: #3eb9fe;
-}
-
-.sectionDescription span.dashboardBtn a:hover {
-  color: #3eb9fe;
+  font-weight: 500;
 }
 
 .sectionTitle {

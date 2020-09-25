@@ -158,6 +158,7 @@ app.get("/curatedList/model/:name", (req, res) => {
 
 // dynamic printable pages, option available on dashboard page
 app.get("/curatedList/printModel/:name", (req, res) => {
+  modelName = req.params.name;
   var parser = new xml2js.Parser();
   fs.readFile("./files/" + req.params.name + ".vcml", (err, data) => {
     parser.parseString(data, (err, result) => {
@@ -168,13 +169,14 @@ app.get("/curatedList/printModel/:name", (req, res) => {
       );
       var generated = template({ data: data });
       fs.writeFileSync(
-        "./public/html/" + "model_" + req.params.id + ".html",
+        "./views/" + "static_" + req.params.name + ".hbs",
         generated,
         "utf-8"
       );
       res.render("printModel", {
         title: "ModelBricks - Model Print Page",
         data,
+        modelName,
       });
     });
   });
@@ -192,6 +194,12 @@ app.get("/curatedList/printModel/:name", (req, res) => {
       });
     }
   );
+});
+
+// displaying static pages (searched by GOOGLE)
+// Fetching Curated List of models from Vcel Beta API
+app.get("/static/:name", async (req, res) => {
+  res.render(`static_${req.params.name}`);
 });
 
 //Declaring static informative pages folder (Home, About, motivation etc) - public
