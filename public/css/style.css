@@ -2988,18 +2988,8 @@ span.unit {
 }
 /*# sourceMappingURL=style.css.map */
 
-.input-color {
-    position: relative;
-}
-.input-color input {
-    padding-left: 20px;
-}
-.input-color .color-box {
-    width: 10px;
-    height: 10px;
-    display: inline-block;
-    background-color: #ccc;
-    position: absolute;
-    left: 5px;
-    top: 5px;
+#demobox {
+  background-color: #0a74ff ;
+  padding: 10px ;
+  border: 2px solid blue ;
 }
