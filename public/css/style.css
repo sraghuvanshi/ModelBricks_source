@@ -2989,6 +2989,7 @@ span.unit {
 /*# sourceMappingURL=style.css.map */
 
 #demobox {
+  width: 400px;
   background-color: #0a74ff ;
   padding: 10px ;
   border: 2px solid blue ;
