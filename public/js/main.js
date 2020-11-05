@@ -961,6 +961,19 @@ fetch("/json/annotations.json")
             `;
       }
     }
+  
+      // Math Type2 -------------------------->
+
+    for (i in json.BioModel.math2) {
+      var text = json.BioModel.math2[i]._;
+      var name = json.BioModel.math2[i].$.name;
+      let mathType2 = document.getElementById("mathType2");
+      if (mathType2 != null) {
+        mathType2.innerHTML += `
+            <p>${text}</p>
+            `;
+      }
+    }
   });
 
 // downloads section
