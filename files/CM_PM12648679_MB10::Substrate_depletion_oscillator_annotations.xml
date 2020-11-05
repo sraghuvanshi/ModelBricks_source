@@ -2,7 +2,6 @@
 
 <BioModel name="CM_PM12648679_MB10::Substrate_depletion_oscillator">
   <math name="Deterministic">Deterministic (ODE), Compartmental</math>
-  <math2 name="BBBBB"</math2>
   <url name="MolecularType(R)">http://identifiers.org/obo.go:GO%3A0032991</url>
   <url name="MolecularType(R)">http://identifiers.org/uniprot:P13350</url>
   <url name="MolecularType(R)">http://identifiers.org/uniprot:P24033</url>
