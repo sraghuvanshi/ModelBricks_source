@@ -1,6 +1,6 @@
 # ModelBricks.org
 
-Many computational models in biology are built and intended for "single-use"; the modeling assumptions and descriptions of model elements must be found in the corresponding paper. Expanding models to new and more complex situations is non-trivial. As a result, new models are almost always created anew, repeating literature searches for kinetic parameters, initial conditions and modeling specifics. It is akin to building a brick house starting with a pile of clay. Here we present tghe ​a database of ModelBricks - well-annotated, reusable component mechanisms that can be assembled into fully annotated mathematical models for cell biology. Here we present a database of ModelBricks - well-annotated, reusable component mechanisms that can be assembled into fully annotated mathematical models for cell biology.
+Many computational models in biology are built and intended for "single-use"; the modeling assumptions and descriptions of model elements must be found in the corresponding paper. Expanding models to new and more complex situations is non-trivial. As a result, new models are almost always created anew, repeating literature searches for kinetic parameters, initial conditions and modeling specifics. It is akin to building a brick house starting with a pile of clay. Here we present the ​a database of ModelBricks - well-annotated, reusable component mechanisms that can be assembled into fully annotated mathematical models for cell biology. Here we present a database of ModelBricks - well-annotated, reusable component mechanisms that can be assembled into fully annotated mathematical models for cell biology.
 
 ## Getting Started
 
@@ -8,15 +8,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-The only prerequisite for this project is Node.js. Hence, before starting please make sure that Node.js v12.16.0 or above is installed in your machine. 
+The only prerequisites for this project is Node.js and NPM (Node Package Manager). Hence, before starting please make sure that Node.js (v12.16.0 or above) and NPM (v6.13.4 or above) are installed in your machine. 
 If not installed already, follow the instructions below:
 
 ```bash
-# Check if Node.js is already installed
+# Check if Node.js and NPM is already installed
 $ node -v
-
-# If a version number is displayed, then its already installed and you are good to go. Otherwise head over to https://nodejs.org/en/download/ and download the latest version. To check it's installed, follow the above mentioned step.
+$ npm -v
 ```
+If respective version numbers are displayed, then they are already installed and you are good to go. Otherwise head over to [Node.js Download Page](https://nodejs.org/en/download/) and [NPM Download instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm ) and download the latest version. To check it's installed, follow the above mentioned step.
 
 ### Installing and Running project locally
 
